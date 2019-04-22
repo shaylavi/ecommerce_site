@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
-    /*
-      Deployed website version:
-    https://dev.d2m2bjz9jknlcg.amplifyapp.com/
-
-    */
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Buy green - save the planet! Be part of the change." />
@@ -16,6 +9,7 @@
     <title>Title of the website</title>
 
     <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" href="./css/leaves.css"/>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -23,11 +17,20 @@
 
   </head>
   <body>
-    <nav class="navbar navbar-default" style="margin-bottom: 0px;">
+    <nav role="navigation" class="navbar navbar-light" style="background-color: white; margin-bottom: 0px; ">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Logo goes here</a>
+          <img src="https://s3.us-east-2.amazonaws.com/eco-travel/products/logo.png" />
+          <a class="navbar-brand" href="#">
+            Eco-Traveller
+          </a>
+          <div class="navbar-duplicate">
+            Eco-Traveller
+            </div>
         </div>
+        <div id="leaves" class="navbar-right">
+          <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>
+        </div>        
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="#">HOME</a></li>
           <li class="dropdown">
