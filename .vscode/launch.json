@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost/bootstrap",
+            "url": "http://localhost:83/eCommerceWebsite/index.php",
             "webRoot": "${workspaceFolder}"
         }
     ]

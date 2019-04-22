@@ -1,173 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+    /*
+      Deployed website version:
+    https://dev.d2m2bjz9jknlcg.amplifyapp.com/
+
+    */
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Buy green - save the planet! Be part of the change."
-    />
+    <meta name="description" content="Buy green - save the planet! Be part of the change." />
     <link rel="icon" href="favicon.ico" />
 
     <title>Title of the website</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
-    />
+
+    <link rel="stylesheet" href="./css/style.css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-    <style>
-      .custom {
-        border: 1px solid black;
-        background-color: lightgray;
-      }
-      /* 
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-
-      .topnav {
-        overflow: hidden;
-        background-color: #e9e9e9;
-      }
-
-      .topnav a {
-        float: left;
-        display: block;
-        color: black;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-      }
-
-      .topnav a:hover {
-        background-color: #ddd;
-        color: black;
-      }
-
-      .topnav a.active {
-        background-color: #2196f3;
-        color: white;
-      }
-
-      .topnav .search-container {
-        float: right;
-      }
-
-      .topnav input[type='text'] {
-        padding: 6px;
-        margin-top: 8px;
-        font-size: 17px;
-        border: none;
-      }
-
-      .topnav .search-container button {
-        float: right;
-        padding: 6px 10px;
-        margin-top: 8px;
-        margin-right: 16px;
-        background: #ddd;
-        font-size: 17px;
-        border: none;
-        cursor: pointer;
-      }
-
-      .topnav .search-container button:hover {
-        background: #ccc;
-      }
-
-      @media screen and (max-width: 600px) {
-        .topnav .search-container {
-          float: none;
-        }
-        .topnav a,
-        .topnav input[type='text'],
-        .topnav .search-container button {
-          float: none;
-          display: block;
-          text-align: left;
-          width: 100%;
-          margin: 0;
-          padding: 14px;
-        }
-        .topnav input[type='text'] {
-          border: 1px solid #ccc;
-        }
-      } */
-      .carousel-style {
-        display: flex;
-        justify-content: center;
-      }
-      .carousel-item {
-        background-size: cover !important;
-        background-position: center;
-        width: 100%;
-        height: 600px;
-      }
-      .carousel-item-1 {
-        background: url('https://media.istockphoto.com/photos/green-natural-beech-tree-forest-illuminated-by-sunbeams-through-fog-picture-id540390024?k=6&m=540390024&s=612x612&w=0&h=r5WY8QdFbHeT_KdS9Jd7rJFBE2belS0j9dOoP4QEsTA=');
-      }
-      .carousel-item-2 {
-        background: url('http://www.itslyfe.com/wp-content/uploads/2018/08/ad5dd428f9d19c58613e372e4ede9c6c.jpg');
-      }
-      .carousel-item-3 {
-        background: url('https://www.statravel.com.au/static/au_division_web_live/assets/sta-travel-default-min.jpg');
-      }
-      .slider-text{
-        color: white;
-        font-size: 47px;
-        display: flex;
-        flex-direction: column;
-        height:100%;
-        padding-left: 200px;
-        padding-top: 100px;
-
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      .bg-4 { 
-  background-color: #2f2f2f;
-  color: #ffffff;
-}
-    </style>
   </head>
   <body>
-    <h1>Hello</h1>
-    <nav class="navbar navbar-default" style="margin-bottom: 0px">
+    <nav class="navbar navbar-default" style="margin-bottom: 0px;">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Logo goes here</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Page 1</a></li>
-          <li><a href="#">Page 2</a></li>
-          <li><a href="#">Page 3</a></li>
+          <li class="active"><a href="#">HOME</a></li>
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"
-              >Page 1 <span class="caret"></span
-            ></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              PRODUCTS<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="#">Page 1-1</a></li>
               <li><a href="#">Page 1-2</a></li>
               <li><a href="#">Page 1-3</a></li>
             </ul>
           </li>
+          <li><a href="#">ABOUT US</a></li>
+          <li><a href="#">CONTACT US</a></li>
           <li>
-            <a href="#"
-              ><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a
-            >
+            <a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>
+            CART</a>
           </li>
           <li>
-            <a href="#"
-              ><span class="glyphicon glyphicon-search"></span> Search</a
-            >
+            <a href="#"><span class="glyphicon glyphicon-search"></span>
+            SEARCH</a>
           </li>
           <!-- <form class="navbar-form navbar-right" action="/action_page.php">
                 <div class="form-group">
@@ -270,7 +150,6 @@
                       </div>
                     </div>
                   </div>
-
                 </footer>
     </body>
 </html>
