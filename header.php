@@ -13,10 +13,10 @@
           <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>
         </div>        
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="#">HOME</a></li>
+          <li class="active"><a href="#">Home</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              PRODUCTS<span class="caret"></span></a>
+              Categories<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="#">Toiletries</a></li>
               <li><a href="#">Clothes</a></li>
@@ -25,15 +25,15 @@
               <li><a href="#">Bamboo</a></li>
             </ul>
           </li>
-          <li><a href="#">ABOUT US</a></li>
-          <li><a href="#">CONTACT US</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
           <li>
             <a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>
-            CART</a>
+            Cart</a>
           </li>
           <li>
             <a href="#"><span class="glyphicon glyphicon-search"></span>
-            SEARCH</a>
+            Search</a>
           </li>
           <!-- <form class="navbar-form navbar-right" action="/action_page.php">
                 <div class="form-group">
