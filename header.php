@@ -18,9 +18,11 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               PRODUCTS<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Page 1-1</a></li>
-              <li><a href="#">Page 1-2</a></li>
-              <li><a href="#">Page 1-3</a></li>
+              <li><a href="#">Toiletries</a></li>
+              <li><a href="#">Clothes</a></li>
+              <li><a href="#">Kitchenware</a></li>
+              <li><a href="#">Bags</a></li>
+              <li><a href="#">Bamboo</a></li>
             </ul>
           </li>
           <li><a href="#">ABOUT US</a></li>
