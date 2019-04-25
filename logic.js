@@ -2,6 +2,7 @@ window.onscroll = function() {
   enableStickyMenu();
 };
 
+var BASE_IMG_URL = "https://s3.us-east-2.amazonaws.com/eco-travel/";
 var navbar = document.getElementById('navbara');
 var sticky = navbar.offsetTop;
 
@@ -20,6 +21,10 @@ var idealSize = parseInt(
     .css('font-size')
     .substr(0, 2)
 );
+$('img').one('load').each(function(e, data) {
+debugger;
+    data.src = BASE_IMG_URL + 'products' + data.src.substr(data.src.lastIndexOf('/'))
+});
 $('#logo').one('load', function() {
     if(this.complete) {
         console.log('here');
