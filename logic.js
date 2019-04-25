@@ -20,6 +20,12 @@ var idealSize = parseInt(
     .css('font-size')
     .substr(0, 2)
 );
+$('#logo').one('load', function() {
+    if(this.complete) {
+        console.log('here');
+        $(this).trigger('load');
+    }
+});
 $('#logo').on('load', function() {
   imgWidth = this.width;
   imgHeight = this.height;
