@@ -23,8 +23,6 @@
 
   <?php include 'header.php'; ?>
   <?php include 'carousel.php'; ?>
-  <div id="navbara">
-  </div>
 
   <div class="container-fluid bg-3 text-center" style="margin-bottom: 20px">
     <div class="row">

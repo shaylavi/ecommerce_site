@@ -1,8 +1,8 @@
-<div id="navbara">
-<nav role="navigation" class="navbar navbar-light" style="background-color: white; margin-bottom: 0px; ">
+<div id="navbar-container">
+<nav role="navigation" class="navbar navbar-light">
       <div class="container-fluid">
         <div class="navbar-header">
-        <a href="index.php"><img id="logo" src="logo.png" data-folder="" /></a>
+        <a href="index.php"><img id="logo" src="logo.png" data-folder="" height="62" /></a>
           <a class="navbar-brand" href="index.php">
             <div class="resizeItem">Eco-Traveller</div>
           </a>

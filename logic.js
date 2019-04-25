@@ -1,7 +1,7 @@
 var BASE_IMG_URL = 'https://s3.us-east-2.amazonaws.com/eco-travel/';
 
 // Sticky menu
-var navbar = document.getElementById('navbara');
+var navbar = document.getElementById('navbar-container');
 var sticky = navbar.offsetTop;
 function enableStickyMenu() {
   if (window.pageYOffset >= sticky) {
@@ -37,7 +37,6 @@ $('img')
 // Trigger load event when the page is cached
 $('#logo').one('load', function() {
   if (this.complete) {
-    console.log('here');
     $(this).trigger('load');
   }
 });
@@ -49,7 +48,7 @@ $('#logo').on('load', function() {
   $(window).on('scroll', function() {
     var scrollVal = $(this).scrollTop() / 10;
     var newSize = idealSize - scrollVal;
-    imageScrollVal = scrollVal + 5;
+    imageScrollVal = scrollVal;// + 5;
     if (newSize >= 30) {
       $('#logo').width(imgWidth - imageScrollVal);
       $('#logo').height(imgHeight - imageScrollVal);
