@@ -1,0 +1,17 @@
+.about-us h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.about-us .hero-image {
+  width:100%;
+  max-height: 400px;
+}
+.about-us img {
+  width:100%;
+}
+.about-us .reversed {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.about-us section {
+  margin-bottom: 10px;
+}
