@@ -2,6 +2,7 @@ var BASE_IMG_URL = 'https://s3.us-east-2.amazonaws.com/eco-travel/';
 
 // Sticky menu
 var navbar = document.getElementById('navbar-container');
+
 var sticky = navbar.offsetTop;
 function enableStickyMenu() {
   if (window.pageYOffset >= sticky) {

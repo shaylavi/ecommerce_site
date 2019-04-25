@@ -21,19 +21,19 @@
   z-index: -1;
 }
 .carousel-item-1 {
-  background: url('../c1.jpg');
+  background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c1.jpg');
 }
 .carousel-item-2 {
-  background: url('../c2.jpg');
+  background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c2.jpg');
 }
 .carousel-item-3 {
-  background: url('../c3.jpg');
+  background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c3.jpg');
 }
 .carousel-item-4 {
-  background: url('../c4.jpg');
+  background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c4.png');
 }
 .carousel-item-5 {
-  background: url('../c5.jpg');
+  background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c5.jpg');
 }
 .slider-text {
   color: white;
