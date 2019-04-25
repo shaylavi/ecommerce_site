@@ -2,13 +2,13 @@
 <nav role="navigation" class="navbar navbar-light" style="background-color: white; margin-bottom: 0px; ">
       <div class="container-fluid">
         <div class="navbar-header">
-        <a href="index.php"><img src="https://s3.us-east-2.amazonaws.com/eco-travel/products/logo.png" /></a>
+        <a href="index.php"><img id="logo" src="https://s3.us-east-2.amazonaws.com/eco-travel/products/logo.png" /></a>
           <a class="navbar-brand" href="index.php">
-            Eco-Traveller
+            <div class="resizeItem">Eco-Traveller</div>
           </a>
           <div class="navbar-duplicate">
-            Eco-Traveller
-            </div>
+            <div class="resizeItem">Eco-Traveller</div>
+          </div>
         </div>
         <div id="leaves" class="navbar-right">
           <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>
@@ -28,6 +28,7 @@
           </li>
           <li><a href="about.php">About Us</a></li>
           <li><a href="contact.php">Contact Us</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           <li>
             <a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span>
             Cart</a>

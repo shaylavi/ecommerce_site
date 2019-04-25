@@ -100,11 +100,11 @@
   font-size: 61px;
   font-family: 'Cantora One', cursive;
   position: absolute;
-  left: 96px;
   z-index: 0;
   color: cadetblue;
   text-shadow: 1px 5px 11px #17b767;
   margin: 5px 9px 0 9px;
+  left: 95px;
   /* text-shadow: -1px 0 cadetblue, 0 1px cadetblue, 1px 0 cadetblue, 0 -1px cadetblue; */
 }
 
@@ -114,36 +114,48 @@
   -webkit-filter: drop-shadow(3px 3px 7px #17b767);
 }
 
-.dropdown-menu{
-  font-size: 18px !important;
-}
-
 .nav {
   position: absolute;
   /* bottom:50px; */
   bottom: 0;
   right: 0;
-  font-size: 18px !important;
+  font-size: 16px !important;
 }
 .active{
   background-color: rgb(236, 236, 236, 0.7);
 }
 
-/* HEADER - END */
-
-#navbara {
-  overflow: hidden;
+.dropdown {
   z-index: 99;
+  font-size: 16px !important;
 }
 
+.dropdown-menu > li{
+  padding: 5px 0 5px 0;
+  font-size: 16px !important;
+}
 
+/* HEADER - END */
+
+/* STICKY MENU - START */
+#navbara {
+  z-index: 99;
+}
 .sticky {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 99;
 }
-
 .sticky + #myCarousel {
-  margin-top: 120px;
+  margin-top: 90px;
 }
+
+#logo {
+  margin: 20px;
+}
+.container-fluid {
+  padding-left: 0 !important;
+}
+/* STICKY MENU - END */
+
