@@ -14,10 +14,10 @@
         <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i>
       </div>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="index.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li><a href="index.php">Home</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" href="products.php">
-          <span class="glyphicon glyphicon-globe"></span>Categories<span class="caret"></span></a>
+          Categories<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="products.php?cat=Toiletries">Toiletries</a></li>
             <li><a href="products.php?cat=Clothes">Clothes</a></li>
@@ -26,11 +26,11 @@
             <li><a href="products.php?cat=Bamboo">Bamboo</a></li>
           </ul>
         </li>
-        <li><a href="about.php"><span class="glyphicon glyphicon-briefcase"></span>About Us</a></li>
-        <li><a href="contact.php"><span class="glyphicon glyphicon-earphone"></span>Contact Us</a></li>
-        <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="about.php">About Us</a></li>
+        <li><a href="contact.php">Contact Us</a></li>
+        <li><a href="login.php">Login</a></li>
         <li>
-          <a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span>
+          <a href="cart.php"></span>
             Cart</a>
         </li>
         <li>
