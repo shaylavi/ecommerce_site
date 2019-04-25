@@ -2,7 +2,7 @@
 <nav role="navigation" class="navbar navbar-light" style="background-color: white; margin-bottom: 0px; ">
       <div class="container-fluid">
         <div class="navbar-header">
-        <a href="index.php"><img id="logo" src="https://s3.us-east-2.amazonaws.com/eco-travel/products/logo.png" /></a>
+        <a href="index.php"><img id="logo" src="logo.png" data-folder="" /></a>
           <a class="navbar-brand" href="index.php">
             <div class="resizeItem">Eco-Traveller</div>
           </a>

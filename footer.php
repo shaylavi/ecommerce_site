@@ -31,26 +31,26 @@
             <div class="row brands">
               <div class="col-md-4 text-center">
                 <div style="padding: 15px">
-                  <img src="brand1.jpg" />
+                  <img src="brand1.jpg" data-folder="products" />
                 </div>
                 <div style="padding: 15px">
-                  <img src="brand2.jpg" />
-                </div>
-              </div>
-              <div class="col-md-4 text-center">
-                <div style="padding: 15px">
-                  <img src="brand3.jpg" />
-                </div>
-                <div style="padding: 15px">
-                  <img src="brand4.png" />
+                  <img src="brand2.jpg" data-folder="products" />
                 </div>
               </div>
               <div class="col-md-4 text-center">
                 <div style="padding: 15px">
-                  <img src="brand5.png" />
+                  <img src="brand3.jpg" data-folder="products" />
                 </div>
                 <div style="padding: 15px">
-                  <img src="brand6.png" />
+                  <img src="brand4.png" data-folder="products" />
+                </div>
+              </div>
+              <div class="col-md-4 text-center">
+                <div style="padding: 15px">
+                  <img src="brand5.png" data-folder="products" />
+                </div>
+                <div style="padding: 15px">
+                  <img src="brand6.png" data-folder="products" />
                 </div>
               </div>
             </div>

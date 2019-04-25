@@ -1,11 +1,8 @@
-window.onscroll = function() {
-  enableStickyMenu();
-};
+var BASE_IMG_URL = 'https://s3.us-east-2.amazonaws.com/eco-travel/';
 
-var BASE_IMG_URL = "https://s3.us-east-2.amazonaws.com/eco-travel/";
+// Sticky menu
 var navbar = document.getElementById('navbara');
 var sticky = navbar.offsetTop;
-
 function enableStickyMenu() {
   if (window.pageYOffset >= sticky) {
     navbar.classList.add('sticky');
@@ -13,6 +10,11 @@ function enableStickyMenu() {
     navbar.classList.remove('sticky');
   }
 }
+window.onscroll = function() {
+  enableStickyMenu();
+};
+
+// Data for the sticky menu animation
 var imgWidth;
 var imgHeight;
 var leftMarginTextVal = 27;
@@ -21,16 +23,25 @@ var idealSize = parseInt(
     .css('font-size')
     .substr(0, 2)
 );
-$('img').one('load').each(function(e, data) {
-debugger;
-    data.src = BASE_IMG_URL + 'products' + data.src.substr(data.src.lastIndexOf('/'))
-});
+
+// Change images source to the AWS bucket based on their folder tag
+$('img')
+  .one('load')
+  .each(function(e, data) {
+    if (data.dataset.folder !== undefined)
+      var startPos = data.src.lastIndexOf('/');
+    if (data.dataset.folder === '') ++startPos;
+    data.src = BASE_IMG_URL + data.dataset.folder + data.src.substr(startPos);
+  });
+
+// Trigger load event when the page is cached
 $('#logo').one('load', function() {
-    if(this.complete) {
-        console.log('here');
-        $(this).trigger('load');
-    }
+  if (this.complete) {
+    console.log('here');
+    $(this).trigger('load');
+  }
 });
+// Handle load event for the sticky menu animation
 $('#logo').on('load', function() {
   imgWidth = this.width;
   imgHeight = this.height;
@@ -49,6 +60,7 @@ $('#logo').on('load', function() {
   });
 });
 
+// Pages and files mapping for the active class tag
 var menuMapping = [
   {
     home: 'index',
