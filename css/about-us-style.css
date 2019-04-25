@@ -5,12 +5,13 @@
   width:100%;
   max-height: 400px;
 }
-.about-us img {
+.about-us aside img {
   width:100%;
+  min-width: 320px;
+
 }
-.about-us .reversed {
-  display: flex;
-  flex-direction: row-reverse;
+.about-us p {
+  min-width: 320px;
 }
 .about-us section {
   margin-bottom: 10px;
