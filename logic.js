@@ -39,17 +39,32 @@ $('#logo').on('load', function() {
 });
 
 var menuMapping = [
-    {'home':'index', 'categories':'products', 'about us':'about', 'contact us':'contact', 'login':'login', 'cart':'cart', 'search':'search'}
-]
+  {
+    home: 'index',
+    categories: 'products',
+    'about us': 'about',
+    'contact us': 'contact',
+    login: 'login',
+    cart: 'cart',
+    search: 'search'
+  }
+];
 function AddActiveClass() {
   var listItems = $('li');
-  var pageName = window.location.pathname.substr(window.location.pathname.lastIndexOf('/')+1).split('.')[0];
+  var pageName = window.location.pathname
+    .substr(window.location.pathname.lastIndexOf('/') + 1)
+    .split('.')[0];
 
   for (var i in listItems) {
-      var label = listItems[i].innerText.trim().toLowerCase();
-      if(menuMapping[0][label] === pageName){
+    var label = listItems[i];
+    if (listItems[i].innerText !== '') {
+      label = label.innerText.trim().toLowerCase();
+      if (menuMapping[0][label] === pageName) {
         listItems[i].classList.add('active');
+        listItems[i].firstElementChild.href = '#';
+        break;
       }
+    }
   }
 }
 AddActiveClass();
