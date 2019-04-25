@@ -131,10 +131,12 @@
 }
 
 .dropdown-menu > li{
-  padding: 5px 0 5px 0;
+  padding: 3px 0 3px 0;
   font-size: 16px !important;
 }
-
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
 /* HEADER - END */
 
 /* STICKY MENU - START */

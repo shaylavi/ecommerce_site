@@ -14,9 +14,9 @@
           <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>  <i></i>
         </div>        
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="index.php">Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="products.php">
+            <a class="dropdown-toggle" href="products.php">
               Categories<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="products.php?cat=Toiletries">Toiletries</a></li>
