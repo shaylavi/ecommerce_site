@@ -24,22 +24,22 @@
   <?php include 'header.php'; ?>
   <?php include 'carousel.php'; ?>
 
-  <div class="container-fluid bg-3 text-center" style="margin-bottom: 20px">
+  <div class="container-fluid bg-3 text-center" style="margin-bottom: 80px">
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-md-8">
 
-        <div class="row">
-          <div class="col-md-4">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <span>Recycle</span>
+        <div class="row labels">
+          <div class="col-md-4 h3">
+            <img src="label1.png" data-folder="" />
+            Plastic free
           </div>
-          <div class="col-md-4">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <span>Portable</span>
+          <div class="col-md-4 h3">
+          <img src="label2.png" data-folder="" />
+            <span>Recyclable</span>
           </div>
-          <div class="col-md-4">
-            <span class="glyphicon glyphicon-chevron-right"></span>
+          <div class="col-md-4 h3">
+          <img src="label3.png" data-folder="" />
             <span>Eco friendly</span>
           </div>
         </div>
@@ -49,12 +49,12 @@
     </div>
   </div>
   <div class="container-fluid bg-3 text-center">
-    <h1>NEW PRODUCTS</h1>
-    <div class="panel" style="border:3px solid black; height:350px"></div>
+    <h1>New Products</h1>
+    <div class="panel custom"></div>
   </div>
   <div class="container-fluid bg-3 text-center">
-    <h1>BEST SELLERS</h1>
-    <div class="panel" style="border:3px solid black; height:350px"></div>
+    <h1>Best Sellers</h1>
+    <div class="panel custom"></div>
   </div>
 
   <?php include 'footer.php'; ?>
