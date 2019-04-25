@@ -1,4 +1,5 @@
-      <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 40px">
+      <div id="myCarousel" class="carousel slide" style="margin-bottom: 40px">
+      <!-- data-ride="carousel"  -->
         <!-- Indicators -->
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -10,14 +11,15 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner carousel-style">
-          <div class="item active carousel-item carousel-item-1">
-              <div class="slider-text">
-                  <div style="font-size:47px"><b>Title</b></div>
-                  <div style="font-size:40px">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac feugiat sed lectus vestibulum mattis ullamcorper velit. Amet tellus cras adipiscing enim.
-                  </div>
+          <div class="item active carousel-item">
+            <div class="carousel-item-1"></div>
+            <div class="slider-text">
+              <div style="font-size:47px"><b>Be part of the change!</b></div>
+              <div class="col-md-8" style="font-size:40px">
+                In times where global warming is an issue, we need to come up with better description for this website. Come take part and save this website! Edit this text and make it better.
               </div>
             </div>
+          </div>
 
           <div class="item carousel-item carousel-item-2"></div>
           <div class="item carousel-item carousel-item-3"></div>
