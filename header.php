@@ -1,4 +1,5 @@
-    <nav role="navigation" class="navbar navbar-light" style="background-color: white; margin-bottom: 0px; ">
+<div id="navbara">
+<nav role="navigation" class="navbar navbar-light" style="background-color: white; margin-bottom: 0px; ">
       <div class="container-fluid">
         <div class="navbar-header">
         <a href="index.php"><img src="https://s3.us-east-2.amazonaws.com/eco-travel/products/logo.png" /></a>
@@ -44,3 +45,4 @@
         </ul>
       </div>
     </nav>
+    </div>
