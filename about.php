@@ -16,7 +16,7 @@
 
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/leaves.css" />
-
+  <link rel="stylesheet" href="./css/about-us-style.css" />
 </head>
 
 <body>
