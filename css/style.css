@@ -188,8 +188,8 @@
   width: 100%;
   z-index: 99;
 }
-.sticky + #myCarousel {
-  margin-top: 105px;
+.sticky + #indenter {
+  margin-top: 104px;
 }
 
 #logo {
