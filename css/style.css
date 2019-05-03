@@ -1,226 +1,319 @@
 @import url('https://fonts.googleapis.com/css?family=Cantora+One');
 
 /* CAROUSEL - START */
-.carousel-style {
-  display: flex;
-  justify-content: center;
-  z-index: -1;
-}
-.carousel-item {
-  background-size: cover !important;
-  background-position: center;
-  width: 100%;
-  height: 800px;
-  z-index: -1;
-}
-.carousel-item-div {
-  width: 100%;
-  height: 100%;
-  background-size: cover !important;
-  background-position: center;
-  filter: blur(2px);
-  -webkit-filter: blur(2px);
-}
-.carousel-item-1 {
-  background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c1.jpg');
-}
-.carousel-item-2 {
-  background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c2.jpg');
-}
-.carousel-item-3 {
-  background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c3.jpg');
-}
-.carousel-item-4 {
-  background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c4.png');
-}
-.carousel-item-5 {
-  background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c5.jpg');
-}
-.slider-text {
-  font-size: 47px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding-left: 200px;
-  padding-top: 100px;
-  position: absolute;
-  top: 0;
 
-  font-family: Arial, Helvetica, sans-serif;
-  z-index: 1;
+.carousel-style {
+    display: flex;
+    justify-content: center;
+    z-index: -1;
 }
+
+.carousel-item {
+    background-size: cover !important;
+    background-position: center;
+    width: 100%;
+    height: 800px;
+    z-index: -1;
+}
+
+.carousel-item-div {
+    width: 100%;
+    height: 100%;
+    background-size: cover !important;
+    background-position: center;
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+}
+
+.carousel-item-1 {
+    background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c1.jpg');
+}
+
+.carousel-item-2 {
+    background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c2.jpg');
+}
+
+.carousel-item-3 {
+    background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c3.jpg');
+}
+
+.carousel-item-4 {
+    background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c4.png');
+}
+
+.carousel-item-5 {
+    background: url('https://s3.us-east-2.amazonaws.com/eco-travel/carousel/c5.jpg');
+}
+
+.slider-text {
+    font-size: 47px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-left: 200px;
+    padding-top: 100px;
+    position: absolute;
+    top: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 1;
+}
+
+
 /* CAROUSEL - END */
 
+
 /* FOOTER - START */
+
 .bg-4 {
-  background-color: #2f2f2f;
-  color: #ffffff;
+    background-color: #2f2f2f;
+    color: #ffffff;
 }
+
+
 /* FOOTER - END */
 
+
 /* HEADER - START */
+
 .navbar {
-  background-color: rgb(255, 255, 255, 0.8);
-  margin-bottom: 0px !important;
-  background: -moz-linear-gradient(
-    left,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 11%,
-    rgba(255, 255, 255, 0.8) 37%,
-    rgba(255, 255, 255, 0.7) 100%
-  ); /* FF3.6-15 */
-  background: -webkit-linear-gradient(
-    left,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 11%,
-    rgba(255, 255, 255, 0.8) 37%,
-    rgba(255, 255, 255, 0.7) 100%
-  ); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 11%,
-    rgba(255, 255, 255, 0.8) 37%,
-    rgba(255, 255, 255, 0.7) 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bdffffff',GradientType=1 ); /* IE6-9 */
+    background-color: rgb(255, 255, 255, 0.8);
+    margin-bottom: 0px !important;
+    background: -moz-linear-gradient( left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 11%, rgba(255, 255, 255, 0.8) 37%, rgba(255, 255, 255, 0.7) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient( left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 11%, rgba(255, 255, 255, 0.8) 37%, rgba(255, 255, 255, 0.7) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient( to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 11%, rgba(255, 255, 255, 0.8) 37%, rgba(255, 255, 255, 0.7) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bdffffff', GradientType=1);
+    /* IE6-9 */
 }
 
 .glyphicon {
-  margin: 0 4px 0 4px
+    margin: 0 4px 0 4px
 }
-.navbar-nav > li {
-  margin-left: 6px;
-  margin-right: 6px;
+
+.navbar-nav>li {
+    margin-left: 6px;
+    margin-right: 6px;
 }
 
 .navbar-header {
-  display: flex;
-  flex-flow: row;
-  align-items: center;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
 }
 
 .navbar-brand {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1ab259+0,61c419+33,61c419+33,9de268+72,0fb703+100 */
-  background: #1ab259; /* Old browsers */
-  background: -moz-linear-gradient(
-    45deg,
-    #1ab259 0%,
-    #61c419 33%,
-    #61c419 33%,
-    #9de268 72%,
-    #0fb703 100%
-  ); /* FF3.6-15 */
-  background: -webkit-linear-gradient(
-    45deg,
-    #1ab259 0%,
-    #61c419 33%,
-    #61c419 33%,
-    #9de268 72%,
-    #0fb703 100%
-  ); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-    45deg,
-    #1ab259 0%,
-    #61c419 33%,
-    #61c419 33%,
-    #9de268 72%,
-    #0fb703 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1ab259', endColorstr='#0fb703',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  z-index: 1;
-  font-family: 'Cantora One', cursive;
-  margin: 8px 0 0 0;
-  font-size: 59px !important;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1ab259+0,61c419+33,61c419+33,9de268+72,0fb703+100 */
+    background: #1ab259;
+    /* Old browsers */
+    background: -moz-linear-gradient( 45deg, #1ab259 0%, #61c419 33%, #61c419 33%, #9de268 72%, #0fb703 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient( 45deg, #1ab259 0%, #61c419 33%, #61c419 33%, #9de268 72%, #0fb703 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient( 45deg, #1ab259 0%, #61c419 33%, #61c419 33%, #9de268 72%, #0fb703 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#1ab259', endColorstr='#0fb703', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 1;
+    font-family: 'Cantora One', cursive;
+    margin: 8px 0 0 0;
+    font-size: 59px !important;
 }
+
 .navbar-duplicate {
-  font-size: 61px;
-  font-family: 'Cantora One', cursive;
-  position: absolute;
-  z-index: 0;
-  color: cadetblue;
-  text-shadow: 1px 5px 11px #17b767;
-  margin: 5px 9px 0 9px;
-  left: 95px;
-  /* text-shadow: -1px 0 cadetblue, 0 1px cadetblue, 1px 0 cadetblue, 0 -1px cadetblue; */
+    font-size: 61px;
+    font-family: 'Cantora One', cursive;
+    position: absolute;
+    z-index: 0;
+    color: cadetblue;
+    text-shadow: 1px 5px 11px #17b767;
+    margin: 5px 9px 0 9px;
+    left: 95px;
+    /* text-shadow: -1px 0 cadetblue, 0 1px cadetblue, 1px 0 cadetblue, 0 -1px cadetblue; */
 }
 
 .navbar-header img {
-  max-height: 70px;
-  margin: 19px 18px 0 9px;
-  -webkit-filter: drop-shadow(3px 3px 7px #17b767);
+    max-height: 70px;
+    margin: 19px 18px 0 9px;
+    -webkit-filter: drop-shadow(3px 3px 7px #17b767);
 }
 
 .nav {
-  position: absolute;
-  /* bottom:50px; */
-  bottom: 0;
-  right: 0;
-  font-size: 16px !important;
+    position: absolute;
+    /* bottom:50px; */
+    bottom: 0;
+    right: 0;
+    font-size: 16px !important;
 }
+
 .active {
-  background-color: rgb(236, 236, 236, 0.7);
+    background-color: rgb(236, 236, 236, 0.7);
 }
 
 .dropdown {
-  z-index: 99;
-  font-size: 16px !important;
+    z-index: 99;
+    font-size: 16px !important;
 }
 
-.dropdown-menu > li {
-  padding: 3px 0 3px 0;
-  font-size: 16px !important;
+.dropdown-menu>li {
+    padding: 3px 0 3px 0;
+    font-size: 16px !important;
 }
+
 .dropdown:hover .dropdown-menu {
-  display: block;
+    display: block;
 }
+
+
 /* HEADER - END */
 
+
 /* STICKY MENU - START */
+
 #navbar-container {
-  z-index: 99;
+    z-index: 99;
 }
+
 .sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 99;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
 }
-.sticky + #indenter {
-  margin-top: 104px;
+
+.sticky+#indenter {
+    margin-top: 104px;
 }
 
 #logo {
-  margin: 20px;
+    margin: 20px;
 }
+
 .container-fluid {
-  padding-left: 0 !important;
+    padding-left: 0 !important;
 }
+
+
 /* STICKY MENU - END */
 
+
 /* FOOTER - START */
-.brands > div img {
-  max-height: 60px;
+
+.brands>div img {
+    max-height: 60px;
 }
 
 .footer-notes {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: left;
 }
+
+
 /* FOOTER - END */
 
+
 /* INDEX - START */
-.labels > div img {
-  max-height: 60px;
-  margin: 0 10px 0 10px;
+
+.labels>div img {
+    max-height: 60px;
+    margin: 0 10px 0 10px;
 }
 
 .custom {
-  height: 500px;
+    height: 500px;
 }
 
+
 /* INDEX - END */
+
+
+/* REGISTRATION - START */
+
+
+/* REGISTRATION - END */
+
+
+/* GENERIC - START */
+
+.w-100 {
+    width: 100%;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: nowrap;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.m-0 {
+    margin: 0px;
+}
+
+.w-40 {
+    width: 40%;
+}
+
+.w-60 {
+    width: 60%;
+}
+
+
+/* GENERIC - END */
+
+
+/* BREAK POINTS - START */
+
+
+/* XS */
+
+@media (max-width: 768px) {
+    .w-40,
+    .w-60 {
+        width: 100%;
+    }
+    .flex-wrap {
+        flex-wrap: wrap;
+    }
+}
+
+
+/* SM */
+
+@media (min-width: 768px) and (max-width:992px) {
+    .w-40,
+    .w-60 {
+        width: 100%;
+    }
+    .flex-wrap {
+        flex-wrap: wrap;
+    }
+}
+
+
+/* MD */
+
+@media (min-width: 992px) and (max-width:1200px) {}
+
+
+/* XL */
+
+@media (min-width: 1200px) {}
+
+
+/* BREAK POINTS - END */

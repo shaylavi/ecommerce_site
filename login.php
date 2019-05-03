@@ -13,21 +13,112 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/leaves.css" />
-
 </head>
 
 <body>
-  
+
   <?php include 'header.php'; ?>
 
-    <div>
-       
+
+  <div class="container d-flex flex-center" style="margin-top: 5vw;">
+    <div class="col-lg-6 col-sm-6">
+      <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        <script lang="javascript">
+          function clearText() {
+            var textBoxes = $(".do-clear");
+            for(var i = 0; i < textBoxes.length; i++) {
+              textBoxes[i].value = "";
+            };
+          }
+          function swapPrimary() {
+            
+            if ($("#btn-login").hasClass("btn-primary")) {
+              $("#btn-login")[0].classList.remove("btn-primary");
+              $("#btn-login")[0].classList.add("btn-default");
+              $("#btn-register")[0].classList.add("btn-primary");
+              $("#btn-register")[0].classList.remove("btn-default");
+            } else {
+              $("#btn-login")[0].classList.add("btn-primary");
+              $("#btn-login")[0].classList.remove("btn-default");
+              $("#btn-register")[0].classList.add("btn-default");
+              $("#btn-register")[0].classList.remove("btn-primary");
+            }
+          }
+        </script>
+        <div class="btn-group" role="group">
+          <button type="button" id="btn-login" class="btn btn-primary" href="#tab1" onclick="swapPrimary()" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <div class="hidden-xs">Sign in</div>
+          </button>
         </div>
+        <div class="btn-group" role="group">
+          <button type="button" id="btn-register" class="btn btn-default" href="#tab2" onclick="swapPrimary()" data-toggle="tab"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            <div class="hidden-xs">Register</div>
+          </button>
+        </div>
+      </div>
 
-        <?php include 'footer.php'; ?>
+      <div class="well">
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="tab1">
+            <div class="container-fluid">
+              <form class="form-horizontal col-md-12" action="/handle-login.php" method="post">
+                <div class="form-group">
+                  <label class="control-label" for="email">Email</label>
+                  <input name="email" type="text" class="form-control" id="email" aria-describedby="emailStatus">
 
-      </body>
+                </div>
+                <div class="form-group ">
+                  <label class="control-label" for="password">Password</label>
+                  <input name="password" type="password" class="form-control" id="password" aria-describedby="passwordStatus">
+                </div>
+                <div class="form-group ">
+                  <input value="Sign in" type="submit" class="w-100 btn btn-primary" />
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="tab-pane fade in" id="tab2">
+            <div class="container-fluid">
+              <form class="form-horizontal col-md-12" action="/handle-register.php" method="post">
+                <div class="form-group">
+                  <label class="control-label" for="register-firstname">First Name</label>
+                  <input name="firstname" type="text" class="form-control do-clear" id="register-firstname" aria-describedby="">
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="register-lastname">First Name</label>
+                  <input name="lastname" type="text" class="form-control do-clear" id="register-lastname" aria-describedby="">
+                </div>
+                <div class="form-group ">
+                  <label class="control-label" for="register-email">Email</label>
+                  <input name="email" type="text" class="form-control do-clear" id="register-email" aria-describedby="emailStatus">
+                </div>
+                <div class="form-group ">
+                  <label class="control-label" for="register-password">Password</label>
+                  <input name="password" type="password" class="form-control do-clear" id="register-password" aria-describedby="passwordStatus">
+                </div>
+                <div class="form-group ">
+                  <input value="Register" type="submit" class="col-md-9 btn btn-primary" />
+                  <input value="Clear" type="button" onclick="clearText();" class="col-md-2 pull-right btn btn-default" />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <?php include 'footer.php'; ?>
+
+</body>
+
 </html>
