@@ -2,8 +2,7 @@
 Project for AIT
 
 ## Getting Started
-Create a file called *db-config.php* 
-Copy in the text and insert values
+Create a file called *db-config.php* and copy in the text and insert values
 ```
 <?php
     $dbServer = "";
