@@ -5,9 +5,9 @@ Project for AIT
 Create a file called *db-config.php* and copy in the text and insert values
 ```
 <?php
-    $dbServer = "";
-    $dbUsername = "";
-    $dbPassword = "";
-    $dbName = "";
+    define('dbServer', '');
+    define('dbUsername', "");
+    define('dbPassword', "");
+    define('dbName', "");
 ?>
 ```
