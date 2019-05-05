@@ -2,7 +2,7 @@
 Project for AIT
 
 ## Getting Started
-Create a file called dbconfig.php
+Create a file called *db-config.php* 
 Copy in the text and insert values
 ```
 <?php
