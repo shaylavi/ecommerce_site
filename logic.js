@@ -29,10 +29,12 @@ var idealSize = parseInt(
 $('img')
   .one('load')
   .each(function(e, data) {
-    if (data.dataset.folder !== undefined)
+    if (data.dataset.folder !== undefined) {
       var startPos = data.src.lastIndexOf('/');
-    if (data.dataset.folder === '') ++startPos;
-    data.src = BASE_IMG_URL + data.dataset.folder + data.src.substr(startPos);
+      if (data.dataset.folder === '') ++startPos;
+
+      data.src = BASE_IMG_URL + data.dataset.folder + data.src.substr(startPos);
+    }
   });
 
 // Trigger load event when the page is cached
@@ -49,7 +51,7 @@ $('#logo').on('load', function() {
   $(window).on('scroll', function() {
     var scrollVal = $(this).scrollTop() / 10;
     var newSize = idealSize - scrollVal;
-    imageScrollVal = scrollVal;// + 5;
+    imageScrollVal = scrollVal; // + 5;
     if (newSize >= 30) {
       $('#logo').width(imgWidth - imageScrollVal);
       $('#logo').height(imgHeight - imageScrollVal);
