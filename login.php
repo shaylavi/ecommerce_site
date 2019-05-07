@@ -67,7 +67,7 @@
         <div class="tab-content">
           <div class="tab-pane fade in active" id="tab1">
             <div class="container-fluid">
-              <form class="form-horizontal col-md-12" action="/handle-login.php" method="post">
+              <form class="form-horizontal col-md-12" id="loginform" method="post">
                 <div class="form-group">
                   <label class="control-label" for="email">Email</label>
                   <input name="email" type="text" class="form-control" id="email" aria-describedby="emailStatus">
@@ -85,13 +85,13 @@
           </div>
           <div class="tab-pane fade in" id="tab2">
             <div class="container-fluid">
-              <form class="form-horizontal col-md-12" action="/handle-register.php" method="post">
+              <form class="form-horizontal col-md-12" id="registerform" method="post">
                 <div class="form-group">
                   <label class="control-label" for="register-firstname">First Name</label>
                   <input name="firstname" type="text" class="form-control do-clear" id="register-firstname" aria-describedby="">
                 </div>
                 <div class="form-group">
-                  <label class="control-label" for="register-lastname">First Name</label>
+                  <label class="control-label" for="register-lastname">Last Name</label>
                   <input name="lastname" type="text" class="form-control do-clear" id="register-lastname" aria-describedby="">
                 </div>
                 <div class="form-group ">
@@ -113,8 +113,52 @@
       </div>
 
     </div>
-  </div>
+    <script>
+      $(document).ready(function() {
+        $('#loginform').submit(function(e) {
+          e.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: 'snippets\\handle-login.php',
+            data: $(this).serialize(),
+            success: function(data)
+            {
+              alert(data);
+              if (data === 200) {
+                // Valid User
+                window.location = ("index.php");
 
+              }
+              else {
+                // Password wrong
+                alert("Username or password was incorrect");
+              }
+            }
+          });
+        });
+       
+        $('#registerform').submit(function(e) {
+          e.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: 'snippets\\handle-register.php',
+            data: $(this).serialize(),
+            success: function(data)
+            {
+              alert(data);
+                if (data === 200) {
+                  window.location = ("index.php");
+                }
+                else {
+                  
+                alert("Registration");
+                }
+            }
+          });
+        });
+      });
+      </script>
+  </div>
 
 
   <?php include 'footer.php'; ?>
