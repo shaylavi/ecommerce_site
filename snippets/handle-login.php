@@ -35,4 +35,32 @@
         // PUT USER INTO SESSION
         echo $user->firstName;
     }
+    function Login() {
+       $success = false;
+       try{
+          
+          $valid = $stmt->fetchColumn();
+   
+          if( $valid ) {
+          $success = true;
+                      session_start();
+   
+   
+          session_regenerate_id();
+          $_SESSION['user'] = $user['user'];
+          session_write_close();
+          echo ('Login');
+          exit();
+   
+          }
+   
+          $con = null;
+          return $success;
+          }catch (PDOException $e) {
+          echo $e->getMessage();
+          return $success;
+       }
+    }
+    ?>
+   
 ?>
