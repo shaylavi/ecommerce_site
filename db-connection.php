@@ -1,33 +1,16 @@
 <?php
-
+    
     if ((require_once 'db-config.php') == FALSE) {
         echo '<script>alert("Database error: db-config.php file has not been made")</script>';
     }
-
-    function verifyCustomer($username, $password) {
-        return false;
-    }
-
     function openConnection() {
         $connection = new mysqli(dbServer, dbUsername, dbPassword, dbName);
         if ($connection->connect_error) {
             echo "Failed to connect to database";
             die("Connection Failed: ".$connection->connect_error);
+            return false;
         }
         return $connection;
-    }
-    function registerNewCustomer($firstName, $lastName, $email, $password) {
-        $connection = openConnection();
-        $query = $connection.prepare("INSERT INTO `Customers` (`FirstName`,`LastName`,`Email`,`Password`) VALUES (?,?,?,?);");
-        $query.bind_param("ssss",$firstName, $lastName, $email, $password);
-        
-        $password = password_hash($password,PASSWORD_DEFAULT);
-        
-        $query.execute();
-        echo "Record added";
-        $query->close();
-
-        closeConnection($connection);
     }
     
     function makeQuery($sqlStatement) {
@@ -88,6 +71,20 @@
         return $products;
     }
 
+    class User {
+        public $email;
+        public $firstName;
+        public $lastName;
+        private $password;
+        public function __construct($email, $firstName, $lastName, $password)
+        {
+            $this->email = $email;
+            $this->firstName = $firstName;
+            $this->lastName = $lastName;
+            $this->password = $password;
+        }
+    }
+
     class Material {
         public $title = "MaterialName";
         public $displayColour = "#111111";
@@ -96,7 +93,6 @@
             $this->title = $title;
             $this->$displayColour = $displayColour;
             $this->$textColour = $textColour;
-            echo $this->title;
         }
     }
     class Product {
