@@ -28,8 +28,9 @@
         if ($numberOfResults > 0) {
             while ($row = $result->fetch_assoc()) {
                 $newMaterial = new Material($row["Title"], $row["DisplayColour"], $row["DisplayTextColour"]);
+                $newMaterial->displayColour = $row["DisplayColour"];
+                $newMaterial->textColour = $row["DisplayTextColour"];
                 $materials += [$row["MaterialID"] => $newMaterial];
-
             }
         }
         return $materials;
@@ -49,7 +50,6 @@
              * the material to the already made products materials
             */ 
             while ($row = $result->fetch_assoc()) {
-            
                 if (array_key_exists($row["ProductID"],$products)) {
                    $products[$row["ProductID"]]->addMaterial($materials[$row["MaterialID"]]);
                 } 
@@ -87,7 +87,7 @@
 
     class Material {
         public $title = "MaterialName";
-        public $displayColour = "#111111";
+        public $displayColour;
         public $textColour = "#FFFFFF";
         public function __construct($title, $displayColour, $textColour) {
             $this->title = $title;
