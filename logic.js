@@ -28,13 +28,14 @@ var idealSize = parseInt(
 
 // Change images source to the AWS bucket based on their folder tag
 $('img')
-    .one('load')
-    .each(function(e, data) {
-        if (data.dataset.folder !== undefined)
-            var startPos = data.src.lastIndexOf('/');
-        if (data.dataset.folder === '') ++startPos;
-        data.src = BASE_IMG_URL + data.dataset.folder + data.src.substr(startPos);
-    });
+  .one('load')
+  .each(function(e, data) {
+        if (data.dataset.folder !== undefined) {
+           var startPos = data.src.lastIndexOf('/');
+            if (data.dataset.folder === '') ++startPos;
+                data.src = BASE_IMG_URL + data.dataset.folder + data.src.substr(startPos);
+        }
+  });
 
 // Trigger load event when the page is cached
 $('#logo').one('load', function() {

@@ -50,7 +50,22 @@
   </div>
   <div class="container-fluid bg-3 text-center">
     <h1>New Products</h1>
-    <div class="panel custom"></div>
+    <div class="panel custom">
+    <div class="my-list">
+			<img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />
+			<h3>HP Core i3 6th Gen</h3>
+			<span>RS:45K</span>
+			<span class="pull-right">SKU:100022</span>
+			<div class="offer">Extra 5% Off. Cart value Rs 500</div>
+			<div class="detail">
+			<p>Glyphicons in Bootstrap : Bootstrap Includes over 250 glyphs in font format </p>
+			<img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />
+			<a href="#" class="btn btn-info">Add To Cart</a>
+			<a href="#" class="btn btn-info">Deatil</a>
+			</div>
+		</div>
+
+    </div>
   </div>
   <div class="container-fluid bg-3 text-center">
     <h1>Best Sellers</h1>
