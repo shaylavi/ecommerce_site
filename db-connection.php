@@ -15,13 +15,12 @@ function openConnection()
     return $connection;
 }
 
-
 function makeQuery($sqlStatement)
 {
     $connection = openConnection();
     $result = $connection->query($sqlStatement);
+    mysqli_close($connection);
     return $result;
-    closeConnection($connection);
 }
 
 function getAllMaterials()
