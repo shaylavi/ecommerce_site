@@ -18,12 +18,8 @@
         <li class="dropdown">
           <a class="dropdown-toggle" href="products.php">
           Categories<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="products.php?cat=Toiletries">Toiletries</a></li>
-            <li><a href="products.php?cat=Clothes">Clothes</a></li>
-            <li><a href="products.php?cat=Kitchenware">Kitchenware</a></li>
-            <li><a href="products.php?cat=Bags">Bags</a></li>
-            <li><a href="products.php?cat=Bamboo">Bamboo</a></li>
+          <ul class="dropdown-menu" id="headerCategories">
+            
           </ul>
         </li>
         <li><a href="about.php">About Us</a></li>
