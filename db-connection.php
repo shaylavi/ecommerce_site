@@ -23,6 +23,12 @@ function makeQuery($sqlStatement)
     return $result;
 }
 
+// function createRecords($tablesName, $arrayOfStrings){
+//     $stmt = $connection->prepare("INSERT INTO ".$tablesName." VALUES (?, ?, ?)");
+//     $stmt->bind_param("sss", $firstname, $lastname, $email);    
+//     $stmt->execute();
+// }
+
 function getAllMaterials()
 {
     $materials = [];
