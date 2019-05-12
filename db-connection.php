@@ -80,7 +80,27 @@ function getAllProducts()
     }
     return $products;
 }
+function findCustomer($email) {
+    $connection = openConnection();
+     
+    $email = $connection->real_escape_string($email);
 
+    $query = $connection->prepare("SELECT Email, Password, FirstName, LastName FROM `Customers` WHERE Email = ?");
+    $query->bind_param("s",$email);
+    
+    $query->execute();
+
+    $result = $query->get_result();
+    
+    $numberOfResults = $result->num_rows;
+    if ($numberOfResults > 0) {
+        $row = $result->fetch_assoc();
+        $customer = new User($row["Email"],$row["FirstName"],$row["LastName"],$row["Password"]);
+        return $customer;
+    } else {
+        return false;
+    }
+}
 class User
 {
     public $email;
@@ -93,6 +113,9 @@ class User
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->password = $password;
+    }
+    public function isValidPassword($password) {
+        return password_verify($password, $this->password);
     }
 }
 

@@ -130,7 +130,7 @@
               data = JSON.parse(data);
               console.log(data);
               if (data.success) {
-                location.replace("https://www.w3schools.com");
+                location.replace("index.php");
               } else {
                 $("#passwordFailedNotice").html(data.message);
               }

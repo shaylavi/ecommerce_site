@@ -4,31 +4,20 @@
     function validateCustomer($email, $password) {
         $response = (object)'response';
         $response->success = false;
-        $password = password_hash($password,PASSWORD_DEFAULT);
-                
-        $connection = openConnection();
-
-        $email = $connection->real_escape_string($email);
-        $email = $connection->real_escape_string($email);
-
-        $query = $connection->prepare("SELECT Email, Password, FirstName, LastName FROM `Customers` WHERE Email = ? AND Password = ?");
-        $query->bind_param("ss",$email, $password);
         
-        $query->execute();
-
-        $result = $query->get_result();
+        $currentCustomer = findCustomer($email);
         
-        $numberOfResults = $result->num_rows;
-        if ($numberOfResults > 0) {
-            $row = $result->fetch_assoc();
-            $validUser = new User($row["Email"],$row["FirstName"],$row["LastName"],$row["Password"]);
-            $_SESSION['customer'] = $validUser;
-            $response->user = json_encode($validUser);
-            $response->success = true;
-            $response->message = "Login successful";
+        if ($currentCustomer) {
+            if($currentCustomer->isValidPassword($password)) {
+                $_SESSION['customer'] = $currentCustomer;
+                $response->user = json_encode($currentCustomer);
+                $response->success = true;
+                $response->message = "Login successful";
+            } else {
+                $response->message = "Username or password was incorrect";
+            }
         } else {
-            $response->success = false;
-            $response->message = "Username or Password was incorrect.";
+            $response->message = "Email was not found.";
         }
         echo json_encode($response);
     }
