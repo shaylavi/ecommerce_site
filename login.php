@@ -80,6 +80,9 @@
                 <div class="form-group ">
                   <input value="Sign in" type="submit" class="w-100 btn btn-primary" />
                 </div>
+                <div class="form-group">
+                  <label class="control-label" id="passwordFailedNotice" style="color:red;"></label>
+                </div>
               </form>
             </div>
           </div>
@@ -116,6 +119,7 @@
     <script>
       $(document).ready(function() {
         $('#loginform').submit(function(e) {
+          $("#passwordFailedNotice").html("");
           e.preventDefault();
           $.ajax({
             type: "POST",
@@ -123,15 +127,12 @@
             data: $(this).serialize(),
             success: function(data)
             {
-              alert(data);
-              if (data === 200) {
-                // Valid User
-                window.location = ("index.php");
-
-              }
-              else {
-                // Password wrong
-                alert("Username or password was incorrect");
+              data = JSON.parse(data);
+              console.log(data);
+              if (data.success) {
+                location.replace("https://www.w3schools.com");
+              } else {
+                $("#passwordFailedNotice").html(data.message);
               }
             }
           });
@@ -145,14 +146,9 @@
             data: $(this).serialize(),
             success: function(data)
             {
-              alert(data);
-                if (data === 200) {
-                  window.location = ("index.php");
-                }
-                else {
-                  
-                alert("Registration");
-                }
+              data = JSON.parse(data);
+              console.log(data);
+              
             }
           });
         });
