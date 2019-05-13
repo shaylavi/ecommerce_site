@@ -231,8 +231,19 @@
 
 /* INDEX - END */
 
+.panel {
+    margin: 15px;
+}
+.input-lg {
+    border-radius: 0px;
+}
+
+.product-image {
+    padding: 7px;
+}
+
 .my-list {
-    padding: 10px;
+    padding: 0px;
     border: 1px solid #f5efef;
     float: left;
     margin: 15px 0;
@@ -240,6 +251,20 @@
     box-shadow: 2px 3px 0px #e4d8d8;
     position:relative;
     overflow:hidden;
+    max-width: 250px;
+}
+.my-list p {
+    text-align: left;
+}
+
+.product-buttons {
+width:100%;
+display:flex;
+justify-content: space-around;
+}
+
+.my-list li {
+padding-top: 10px;
 }
 .my-list img {
   max-width: 200px;

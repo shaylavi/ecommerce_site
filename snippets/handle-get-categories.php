@@ -1,5 +1,5 @@
 <?php 
-    include '../db-connection.php';
+    require_once '../db-connection.php';
     $sqlStatement = "SELECT * FROM Categorys";
     $result = makeQuery($sqlStatement);
     $numberOfResults = $result->num_rows;

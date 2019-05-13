@@ -5,12 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Listen for XDebug",
-            "type": "php",
-            "request": "launch",
-            "port": 9000
-        },
-        {
             "name": "Launch currently open script",
             "type": "php",
             "request": "launch",
@@ -24,6 +18,12 @@
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:83/eCommerceWebsite/index.php",
             "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Listen for XDebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9000
         }
     ]
 }
