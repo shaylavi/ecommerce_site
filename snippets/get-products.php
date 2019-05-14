@@ -1,5 +1,6 @@
 <?php
 require_once 'db-connection.php';
+require_once 'class-definitions.php';
 
 function buildHtmlNewProducts(){
   $newProducts = fetchProducts(4);

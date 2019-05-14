@@ -17,14 +17,21 @@
         <li><a href="index.php">Home</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" href="products.php">
-          Categories<span class="caret"></span></a>
+            Categories<span class="caret"></span></a>
           <ul class="dropdown-menu" id="headerCategories">
-            
+
           </ul>
         </li>
         <li><a href="about.php">About Us</a></li>
         <li><a href="contact.php">Contact Us</a></li>
-        <li><a href="login.php">Login</a></li>
+        <?php 
+          if (isset($_SESSION["customer"]))
+          {
+            echo '<li><a href="loggedin.php">Logout</a></li>';
+          } else {
+            echo '<li><a href="login.php">Login</a></li>';
+          }
+        ?>
         <li>
           <a href="cart.php"></span>
             Cart</a>

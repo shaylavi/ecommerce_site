@@ -1,5 +1,7 @@
 <?php
+session_start();
     require_once '../db-connection.php';
+    require_once 'class-definitions.php';
     function registerNewCustomer($firstName, $lastName, $email, $password) {
         $response = (object)'response';
         $response->success = false;
@@ -15,7 +17,9 @@
             
             $query->execute();
             $query->close();
-            $response->user = json_encode(new User($email,$firstName,$lastName,$password));
+            $newUser = new User($email,$firstName,$lastName,$password);
+            $_SESSION['customer'] = $newUser;
+            $response->user = json_encode($newUser);
             $response->success = true;
         }
         
