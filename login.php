@@ -16,10 +16,7 @@ session_start();
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/leaves.css" />
 </head>
@@ -28,19 +25,19 @@ session_start();
 
   <?php include 'header.php'; ?>
 
-
-  <div class="container d-flex flex-center" style="margin-top: 5vw;">
+  <div class="container d-flex flex-center" style="margin-top: 5vw;" id="notLoggedIn">
     <div class="col-lg-6 col-sm-6">
-      <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+      <div class="btn-pref btn-group btn-group-justified btn-group-lg" id="pageLoginButtons" role="group" aria-label="...">
         <script lang="javascript">
           function clearText() {
             var textBoxes = $(".do-clear");
-            for(var i = 0; i < textBoxes.length; i++) {
+            for (var i = 0; i < textBoxes.length; i++) {
               textBoxes[i].value = "";
             };
           }
+
           function swapPrimary() {
-            
+
             if ($("#btn-login").hasClass("btn-primary")) {
               $("#btn-login")[0].classList.remove("btn-primary");
               $("#btn-login")[0].classList.add("btn-default");
@@ -67,7 +64,7 @@ session_start();
       </div>
 
       <div class="well">
-        <div class="tab-content">
+        <div class="tab-content" id="pageContents">
           <div class="tab-pane fade in active" id="tab1">
             <div class="container-fluid">
               <form class="form-horizontal col-md-12" id="loginform" method="post">
@@ -112,54 +109,60 @@ session_start();
                   <input value="Register" type="submit" class="col-md-9 btn btn-primary" />
                   <input value="Clear" type="button" onclick="clearText();" class="col-md-2 pull-right btn btn-default" />
                 </div>
+                <div class="form-group">
+                  <label class="control-label" id="registerFailedNotice" style="color:red;"></label>
+                </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-    <script>
-      $(document).ready(function() {
-        $('#loginform').submit(function(e) {
-          $("#passwordFailedNotice").html("");
-          e.preventDefault();
-          $.ajax({
-            type: "POST",
-            url: 'snippets\\handle-login.php',
-            data: $(this).serialize(),
-            success: function(data)
-            {
-              data = JSON.parse(data);
-              console.log(data);
-              if (data.success) {
-                
-                
-              } else {
-                $("#passwordFailedNotice").html(data.message);
-              }
-            }
-          });
-        });
-       
-        $('#registerform').submit(function(e) {
-          e.preventDefault();
-          $.ajax({
-            type: "POST",
-            url: 'snippets\\handle-register.php',
-            data: $(this).serialize(),
-            success: function(data)
-            {
-              data = JSON.parse(data);
-              console.log(data);
-              
-            }
-          });
-        });
-      });
-      </script>
   </div>
 
+
+  <script>
+    $(document).ready(function() {
+      $('#loginform').submit(function(e) {
+        $("#passwordFailedNotice").html("");
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          url: 'snippets\\handle-login.php',
+          data: $(this).serialize(),
+          success: function(data) {
+            data = JSON.parse(data);
+            console.log(data);
+            if (data.success) {
+              window.location = 'loggedin.php';
+            } else {
+              $("#passwordFailedNotice").html(data.message);
+            }
+          }
+        });
+      });
+
+      $('#registerform').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          url: 'snippets\\handle-register.php',
+          data: $(this).serialize(),
+          success: function(data) {
+            data = JSON.parse(data);
+
+            if (data.success) {
+              data.user = JSON.parse(data.user);
+              window.location = 'loggedin.php';
+            } else {registerFailedNotice
+              $("#registerFailedNotice").html(data.message);
+            }
+          }
+        });
+      });
+    });
+  </script>
+  </div>
 
   <?php include 'footer.php'; ?>
 

@@ -1,7 +1,10 @@
 <?php
+    session_start();
+    require_once 'class-definitions.php';
     require_once '../db-connection.php';
-
     function validateCustomer($email, $password) {
+        $incorrectPasswordMessage = "Username or password was incorrect";
+
         $response = (object)'response';
         $response->success = false;
         
@@ -14,10 +17,10 @@
                 $response->success = true;
                 $response->message = "Login successful";
             } else {
-                $response->message = "Username or password was incorrect";
+                $response->message = $incorrectPasswordMessage;
             }
         } else {
-            $response->message = "Email was not found.";
+            $response->message = $incorrectPasswordMessage;
         }
         echo json_encode($response);
     }
