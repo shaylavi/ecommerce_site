@@ -1,5 +1,7 @@
 <?php
+session_start();
 include 'snippets/get-products.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,4 +92,5 @@ include 'snippets/get-products.php';
   <?php include 'footer.php'; ?>
 
 </body>
+
 </html>
