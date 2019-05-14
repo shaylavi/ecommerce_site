@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'snippets/get-products.php';
 ?>
 <!DOCTYPE html>
