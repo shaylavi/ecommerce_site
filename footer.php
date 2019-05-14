@@ -1,3 +1,4 @@
+<div style="height: 50px"></div>
       <footer class="container-fluid bg-4 text-center">
         <div class="row" style="margin: 10px">
           <div class="col-md-2 footer-brand animated fadeInLeft footer-notes">
@@ -7,7 +8,7 @@
             <p>
               <h6>Eco-Traveller promotes a better way of consumption by offering green, sustainable products. We work closely with the companies who manufacture the product, making sure it is plastic free and ecological.</h6>
             </p>
-            <div class="footer-copyright text-center">Shay Lavi & Nick Hulley<br/>© 2019 All rights reserved</div>
+            <div class="footer-copyright text-center">Shay Lavi & Nick Hulley<br />© 2019 All rights reserved</div>
           </div>
           <div class="col-md-4 text-left" style="margin-top: 50px">
             <div class="col-md-2"></div>

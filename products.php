@@ -23,14 +23,32 @@ session_start();
 </head>
 
 <body>
-  
+
   <?php include 'header.php'; ?>
+  <div style="height: 50px"></div>
 
-    <div>
-       
+  <div class="container">
+    <div class="col-md-2">
+      test
+    </div>
+    <div class="col-md-10">
+      <h1>New Products</h1>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+          <?php
+          buildHtmlProduct("3");
+          ?>
+
         </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+  </div>
 
-        <?php include 'footer.php'; ?>
+  <?php include 'footer.php'; ?>
 
-      </body>
+</body>
+
 </html>

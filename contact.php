@@ -24,13 +24,15 @@ session_start();
 
 <body>
 
-  <?php include 'header.php'; ?>
+<?php include 'header.php'; ?>
+<div style="height: 50px"></div>
 
-  <div>
+<div class="container flexed-container">
 
-  </div>
 
-  <?php include 'footer.php'; ?>
+</div>
+
+<?php include 'footer.php'; ?>
 
 </body>
 

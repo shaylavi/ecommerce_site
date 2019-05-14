@@ -2,6 +2,28 @@
 require_once 'db-connection.php';
 require_once 'class-definitions.php';
 
+function buildHtmlSimilarProducts($id)
+{
+  $similarProducts = fetchSimilarProducts($id);
+
+  foreach ($similarProducts as $p) {
+    echo '
+    <div class="col-md-3">
+    <div class="my-list">
+      <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
+          <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
+          <h4><div>' . $p['title'] . '</div></h4>
+          <p> ' . $p['description'] . ' </p>
+          <div class="product-buttons">
+              <a href="product.php?id=' . $p['id'] . '" class="btn btn-info">Deatil</a>
+              <a href="#" class="btn btn-default">Add To Cart</a>
+          </div>
+      </div>
+      </div>
+      </div>
+      ';
+  }
+}
 function buildHtmlNewProducts()
 {
   $newProducts = fetchProducts(4);
@@ -46,23 +68,37 @@ function buildHtmlTopSellerProducts()
   }
 }
 
-function buildHtmlProduct($id)
-{
-  $product = fetchProduct($id);
-  if (sizeof($product) <= 0) {
-    echo 'Error fetching data';
-  } else if (sizeof($product) > 1) {
-    echo 'Error with the data';
-  } else {
-    $photo_link = print_r($product[0]['photo']);
-
-    echo '<div>TEST.. ' . $photo_link . '</div>';
-  }
-}
-
 function fetchProduct($id)
 {
   $query = makeQuery("SELECT * FROM Products WHERE ProductID = " . $id);
+  $quesryResults = array();
+
+  while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+    $quesryResults = array(
+      "photo" => $row["ImageUrl"],
+      "alt" => $row["ImageAlt"],
+      "title" => $row["Title"],
+      "id" => $row["ProductID"],
+      "price" => $row["Price"],
+      // "category" => $row["CategoryTitle"],
+      "description" => $row["Description"]
+    );
+  }
+
+  $parsedResults = array();
+  foreach ($quesryResults as $key => $p) {
+    $parsedResults += array($key => json_decode(safe_json_encode($p), true));
+  }
+  return $parsedResults;
+  // echo safe_json_encode($parsedResults);  // To be used for JS callback
+}
+
+function fetchSimilarProducts($id)
+{
+  $totalProducts = 4;
+  $RANGE = mt_rand(1, (50 - $totalProducts));
+
+  $query = makeQuery("SELECT * FROM Products WHERE ProductID BETWEEN " . $RANGE . " AND " . ($RANGE + $totalProducts - 1));
   $quesryResults = array();
 
   while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
@@ -71,6 +107,7 @@ function fetchProduct($id)
       "alt" => $row["ImageAlt"],
       "title" => substr($row["Title"], 0, 20) . " ..",
       "id" => $row["ProductID"],
+      "price" => $row["Price"],
       // "category" => $row["CategoryTitle"],
       "description" => substr($row["Description"], 0, 70) . " ..."
     );
@@ -81,7 +118,6 @@ function fetchProduct($id)
     $parsedResults[] = json_decode(safe_json_encode($p), true);
   }
   return $parsedResults;
-  // echo safe_json_encode($parsedResults);  // To be used for JS callback
 }
 
 function fetchProducts($totalProducts, $sorted = false)
@@ -101,6 +137,7 @@ function fetchProducts($totalProducts, $sorted = false)
       "alt" => $row["ImageAlt"],
       "title" => substr($row["Title"], 0, 20) . " ..",
       "id" => $row["ProductID"],
+      "price" => $row["Price"],
       // "category" => $row["CategoryTitle"],
       "description" => substr($row["Description"], 0, 70) . " ..."
     );

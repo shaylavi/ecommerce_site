@@ -25,8 +25,9 @@ session_start();
 <body>
 
   <?php include 'header.php'; ?>
+  <div style="height: 50px"></div>
 
-  <div>
+  <div class="container">
 
   </div>
 

@@ -26,26 +26,28 @@ require_once 'snippets\\class-definitions.php';
 
     <?php include 'header.php'; ?>
 
-    <div class="container d-flex flex-center " style="margin-top: 5vw;" id="alreadyLoggedIn">
-        <div class="">
-            <div class="btn-group w-100" role="group">
-                <button type="button" id="btn-login" class="w-100 btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                    <div class="hidden-xs">Signed in</div>
-                </button>
-            </div>
-            <div class="well">
-                <div class="tab-pane fade in active" id="tab1">
-                    <h2><?php
-                        if (isset($_SESSION['customer'])) {
-                            $customer = json_decode(json_encode($_SESSION['customer']));
-                            echo "Welcome " . $customer->firstName . " " . $customer->lastName;
-                            echo '<hr>';
-                            echo '<button onclick="signOut()" class="w-100 btn btn-warning">Sign out</button>';
-                        } else {
-                            echo "Not signed in";
-                        }
-                        ?>
-                    </h2>
+    <div class="container">
+        <div class="container d-flex flex-center " style="margin-top: 5vw;" id="alreadyLoggedIn">
+            <div class="">
+                <div class="btn-group w-100" role="group">
+                    <button type="button" id="btn-login" class="w-100 btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <div class="hidden-xs">Signed in</div>
+                    </button>
+                </div>
+                <div class="well">
+                    <div class="tab-pane fade in active" id="tab1">
+                        <h2><?php
+                            if (isset($_SESSION['customer'])) {
+                                $customer = json_decode(json_encode($_SESSION['customer']));
+                                echo "Welcome " . $customer->firstName . " " . $customer->lastName;
+                                echo '<hr>';
+                                echo '<button onclick="signOut()" class="w-100 btn btn-warning">Sign out</button>';
+                            } else {
+                                echo "Not signed in";
+                            }
+                            ?>
+                        </h2>
+                    </div>
                 </div>
             </div>
         </div>

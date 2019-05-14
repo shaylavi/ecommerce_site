@@ -408,3 +408,26 @@
 
 
 /* BREAK POINTS - END */
+
+.flexed-container {
+    min-height: 61vh;
+    margin-right: auto;
+    margin-left: auto;    
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product-image img {
+    max-width: 350px;
+}
+
+.product-details * {
+    padding: 5px 0 5px 0;
+}

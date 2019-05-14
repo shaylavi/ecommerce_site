@@ -26,7 +26,7 @@ session_start();
 
   <?php include 'header.php'; ?>
 
-  <main class=" about-us container">
+  <main class="about-us container">
     <div class="row">
       <div class="col-md-12">
         <h1 class="text-center">About Us</h1>
