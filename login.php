@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -130,7 +133,8 @@
               data = JSON.parse(data);
               console.log(data);
               if (data.success) {
-                location.replace("index.php");
+                
+                
               } else {
                 $("#passwordFailedNotice").html(data.message);
               }

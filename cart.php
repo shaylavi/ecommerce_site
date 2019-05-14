@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,14 +23,15 @@
 </head>
 
 <body>
-  
+
   <?php include 'header.php'; ?>
 
-    <div>
-       
-        </div>
+  <div>
 
-        <?php include 'footer.php'; ?>
+  </div>
 
-      </body>
+  <?php include 'footer.php'; ?>
+
+</body>
+
 </html>
