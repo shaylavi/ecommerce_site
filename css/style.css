@@ -260,7 +260,9 @@
     box-shadow: 2px 3px 0px #e4d8d8;
     position: relative;
     overflow: hidden;
-    max-width: 250px;
+    max-width: 270px;
+    min-width: 250px;
+    min-height: 327px;
 }
 
 .my-list p {
@@ -279,6 +281,15 @@
 
 .my-list img {
     max-width: 200px;
+    max-height: 150px;
+}
+
+.new-products {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    height: 280px;
 }
 
 .my-list h3 {

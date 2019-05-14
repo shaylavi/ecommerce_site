@@ -1,5 +1,11 @@
 <?php
 session_start();
+include 'snippets/get-products.php';
+if (sizeof($_GET) > 0) {
+  $productCategory = $_GET['cat'];
+} else {
+  $productCategory = null;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,21 +34,21 @@ session_start();
   <div style="height: 50px"></div>
 
   <div class="container">
-    <div class="col-md-2">
-      test
+    <div class="row">
+      <div class="col-md-12 product-image">
+        This line will include filters to be used
+      </div>
     </div>
-    <div class="col-md-10">
-      <h1>New Products</h1>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-
+    <div class="row">
+      <div class="col-md-2">
+        test
+      </div>
+      <div class="col-md-10">
+        <div class="container-fluid">
           <?php
-          buildHtmlProduct("3");
+          buildHtmlProducts($productCategory);
           ?>
-
         </div>
-        <div class="col-md-2"></div>
       </div>
     </div>
   </div>

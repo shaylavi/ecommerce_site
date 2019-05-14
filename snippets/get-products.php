@@ -2,6 +2,29 @@
 require_once 'db-connection.php';
 require_once 'class-definitions.php';
 
+function buildHtmlProducts($categoryId = null)
+{
+  $newProducts = fetchAllProducts($categoryId);
+
+  foreach ($newProducts as $p) {
+    echo '
+    <div class="col-md-4">
+    <div class="my-list">
+      <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
+          <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
+          <h4><div>' . $p['title'] . '</div></h4>
+          <p> ' . $p['description'] . ' </p>
+          <div class="product-buttons">
+              <a href="product.php?id=' . $p['id'] . '" class="btn btn-info">Deatil</a>
+              <a href="#" class="btn btn-default">Add To Cart</a>
+          </div>
+      </div>
+      </div>
+      </div>
+      ';
+  }
+}
+
 function buildHtmlSimilarProducts($id)
 {
   $similarProducts = fetchSimilarProducts($id);
@@ -68,6 +91,35 @@ function buildHtmlTopSellerProducts()
   }
 }
 
+function fetchAllProducts($category = null)
+{
+  if ($category == null || $category == '' ) {
+    $query = makeQuery("SELECT * FROM Products");
+  } else {
+    $query = makeQuery("SELECT * FROM Products WHERE CategoryID = " . $category);
+  }
+
+  $quesryResults = array();
+
+  while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+    $quesryResults[] = array(
+      "photo" => $row["ImageUrl"],
+      "alt" => $row["ImageAlt"],
+      "title" => substr($row["Title"], 0, 18) . " ..",
+      "id" => $row["ProductID"],
+      "price" => $row["Price"],
+      // "category" => $row["CategoryTitle"],
+      "description" => substr($row["Description"], 0, 70) . " ..."
+    );
+  }
+
+  $parsedResults = array();
+  foreach ($quesryResults as $p) {
+    $parsedResults[] = json_decode(safe_json_encode($p), true);
+  }
+  return $parsedResults;
+}
+
 function fetchProduct($id)
 {
   $query = makeQuery("SELECT * FROM Products WHERE ProductID = " . $id);
@@ -95,10 +147,8 @@ function fetchProduct($id)
 
 function fetchSimilarProducts($id)
 {
-  $totalProducts = 4;
-  $RANGE = mt_rand(1, (50 - $totalProducts));
-
-  $query = makeQuery("SELECT * FROM Products WHERE ProductID BETWEEN " . $RANGE . " AND " . ($RANGE + $totalProducts - 1));
+  $totalProducts = 3;
+  $query = makeQuery("SELECT * FROM Products WHERE CategoryID = (SELECT CategoryID FROM Products WHERE ProductID = " . $id . ") LIMIT " . $totalProducts);
   $quesryResults = array();
 
   while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
