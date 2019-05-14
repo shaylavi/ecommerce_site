@@ -1,19 +1,20 @@
 <?php
 require_once 'db-connection.php';
 
-function buildHtmlNewProducts(){
+function buildHtmlNewProducts()
+{
   $newProducts = fetchProducts(4);
 
-  foreach ($newProducts as $p){
+  foreach ($newProducts as $p) {
     echo '
     <div class="col-md-3">
     <div class="my-list">
       <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
-          <img src="' . $p['photo'] .'" alt="' . $p['alt'] .'" />
-          <h4><div>' . $p['title'] .'</div></h4>
-          <p> ' . $p['description'] .' </p>
+          <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
+          <h4><div>' . $p['title'] . '</div></h4>
+          <p> ' . $p['description'] . ' </p>
           <div class="product-buttons">
-              <a href="product.php?id=' . $p['id'] .'" class="btn btn-info">Deatil</a>
+              <a href="product.php?id=' . $p['id'] . '" class="btn btn-info">Deatil</a>
               <a href="#" class="btn btn-default">Add To Cart</a>
           </div>
       </div>
@@ -23,24 +24,63 @@ function buildHtmlNewProducts(){
   }
 }
 
-function buildHtmlTopSellerProducts(){
+function buildHtmlTopSellerProducts()
+{
   $newProducts = fetchProducts(4);
 
-  foreach ($newProducts as $p){
+  foreach ($newProducts as $p) {
     echo '
     <div class="col-md-3">
-      <div class="my-list thumbnail" onclick="window.location=\'product.php?id=' . $p['id'] .'\'">
-        <div class="bg-primary input-lg">' . $p['title'] .'</div>
+      <div class="my-list thumbnail" onclick="window.location=\'product.php?id=' . $p['id'] . '\'">
+        <div class="bg-primary input-lg">' . $p['title'] . '</div>
         <div class="product-image position-relative">
-            <img src="' . $p['photo'] .'" alt="' . $p['alt'] .'" />
+            <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
         </div>
         <div class="bg-primary input-lg">
-            <a href="product.php?id=' . $p['id'] .'" style="color:white">Details</a>
+            <a href="product.php?id=' . $p['id'] . '" style="color:white">Details</a>
         </div>
       </div>
     </div>
       ';
   }
+}
+
+function buildHtmlProduct($id)
+{
+  $product = fetchProduct($id);
+  if (sizeof($product) <= 0) {
+    echo 'Error fetching data';
+  } else if (sizeof($product) > 1) {
+    echo 'Error with the data';
+  } else {
+    $photo_link = print_r($product[0]['photo']);
+
+    echo '<div>TEST.. ' . $photo_link . '</div>';
+  }
+}
+
+function fetchProduct($id)
+{
+  $query = makeQuery("SELECT * FROM Products WHERE ProductID = " . $id);
+  $quesryResults = array();
+
+  while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+    $quesryResults[] = array(
+      "photo" => $row["ImageUrl"],
+      "alt" => $row["ImageAlt"],
+      "title" => substr($row["Title"], 0, 20) . " ..",
+      "id" => $row["ProductID"],
+      // "category" => $row["CategoryTitle"],
+      "description" => substr($row["Description"], 0, 70) . " ..."
+    );
+  }
+
+  $parsedResults = array();
+  foreach ($quesryResults as $p) {
+    $parsedResults[] = json_decode(safe_json_encode($p), true);
+  }
+  return $parsedResults;
+  // echo safe_json_encode($parsedResults);  // To be used for JS callback
 }
 
 function fetchProducts($totalProducts, $sorted = false)
@@ -70,7 +110,7 @@ function fetchProducts($totalProducts, $sorted = false)
     $parsedResults[] = json_decode(safe_json_encode($p), true);
   }
   return $parsedResults;
-  // echo safe_json_encode($parsedResults);
+  // echo safe_json_encode($parsedResults);  // To be used for JS callback
 }
 
 function safe_json_encode($value, $options = 0, $depth = 512, $utfErrorFlag = false)
