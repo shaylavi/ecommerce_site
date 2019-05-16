@@ -96,7 +96,7 @@ AddActiveClass();
 function getCategorysHtml(id) {
     $.ajax({
         type: "POST",
-        url: 'snippets\\handle-get-categories.php',
+        url: 'snippets/handle-get-categories.php',
         success: function(data) {
             $("#" + id).html(data);
             return data;

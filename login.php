@@ -133,7 +133,7 @@ session_start();
           e.preventDefault();
           $.ajax({
             type: "POST",
-            url: 'snippets\\handle-login.php',
+            url: 'snippets/handle-login.php',
             data: $(this).serialize(),
             success: function(data) {
               data = JSON.parse(data);
@@ -151,7 +151,7 @@ session_start();
           e.preventDefault();
           $.ajax({
             type: "POST",
-            url: 'snippets\\handle-register.php',
+            url: 'snippets/handle-register.php',
             data: $(this).serialize(),
             success: function(data) {
               data = JSON.parse(data);

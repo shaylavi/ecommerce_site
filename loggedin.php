@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'snippets\\class-definitions.php';
+require_once 'snippets/class-definitions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +56,7 @@ require_once 'snippets\\class-definitions.php';
         function signOut() {
             $.ajax({
                 type: "POST",
-                url: 'snippets\\handle-signout.php',
+                url: 'snippets/handle-signout.php',
                 success: function(data) {
                     window.location = "login.php";
                 }
