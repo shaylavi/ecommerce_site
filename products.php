@@ -1,6 +1,6 @@
 <?php
-session_start();
-include 'snippets/get-products.php';
+  include 'snippets/set-url.php';
+  include 'snippets/get-products.php';
 $activeClass = '';
 $productCategory = null;
 

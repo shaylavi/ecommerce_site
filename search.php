@@ -1,5 +1,5 @@
 <?php
-session_start();
+  include 'snippets/set-url.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

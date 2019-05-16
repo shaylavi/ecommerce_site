@@ -139,7 +139,7 @@ session_start();
               data = JSON.parse(data);
               console.log(data);
               if (data.success) {
-                window.location = 'loggedin.php';
+                window.location = data.newURL;
               } else {
                 $("#passwordFailedNotice").html(data.message);
               }
@@ -158,7 +158,7 @@ session_start();
 
               if (data.success) {
                 data.user = JSON.parse(data.user);
-                window.location = 'loggedin.php';
+                window.location = data.newURL;
               } else {
                 registerFailedNotice
                 $("#registerFailedNotice").html(data.message);

@@ -5,7 +5,7 @@ session_start();
     function registerNewCustomer($firstName, $lastName, $email, $password) {
         $response = (object)'response';
         $response->success = false;
-
+        $response->newURL = isset($_SESSION['currentURL']) ? $_SESSION['currentURL'] : "./loggedin.php";
         if (findCustomer($email)) {
             $response->message = "Customer with this email already exists";
         } else {

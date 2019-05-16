@@ -7,6 +7,7 @@
 
         $response = (object)'response';
         $response->success = false;
+        $response->newURL = isset($_SESSION['currentURL']) ? $_SESSION['currentURL'] : "./loggedin.php";
         
         $currentCustomer = findCustomer($email);
         

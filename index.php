@@ -1,7 +1,7 @@
 <?php
-session_start();
+include 'snippets/set-url.php';
 include 'snippets/get-products.php';
-
+echo $_SESSION['currentURL'];
 ?>
 <!DOCTYPE html>
 <html lang="en">

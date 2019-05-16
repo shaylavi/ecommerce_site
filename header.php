@@ -27,7 +27,8 @@
         <?php 
           if (isset($_SESSION["customer"]))
           {
-            echo '<li><a href="loggedin.php">Logout</a></li>';
+            $customer = json_decode(json_encode($_SESSION['customer']));
+            echo '<li><a href="loggedin.php"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>'.$customer->firstName . '</a></li>';
           } else {
             echo '<li><a href="login.php">Login</a></li>';
           }
