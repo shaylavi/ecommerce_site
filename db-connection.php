@@ -1,10 +1,7 @@
 <?php
-require_once 'snippets\\class-definitions.php';
+require_once 'snippets/class-definitions.php';
+require_once 'db-config.php';
 
-// Check for config connection file
-if ((require_once 'db-config.php') == FALSE) {
-    echo '<script>alert("Database error: db-config.php file has not been made")</script>';
-}
 function openConnection()
 {
     $connection = new mysqli(dbServer, dbUsername, dbPassword, dbName);
