@@ -81,7 +81,7 @@ function AddActiveClass() {
 
     for (var i in listItems) {
         var label = listItems[i];
-        if (listItems[i].innerText !== '') {
+        if (listItems[i].innerText !== '' && label.innerText != undefined) {
             label = label.innerText.trim().toLowerCase();
             if (menuMapping[0][label] === pageName) {
                 listItems[i].classList.add('active');

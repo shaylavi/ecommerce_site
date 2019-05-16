@@ -30,7 +30,7 @@ function buildHtmlProducts($categoryId = null)
   foreach ($newProducts as $p) {
     echo '
     <div class="col-md-3" id="product-' . $p['id'] . '">
-    <div class="my-list">
+    <div class="product-style">
       <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
           <div><h4><b>' . $p['title'] . '</b></h4></div>
@@ -53,7 +53,7 @@ function buildHtmlSimilarProducts($id)
   foreach ($similarProducts as $p) {
     echo '
     <div class="col-md-4">
-    <div class="my-list">
+    <div class="product-style">
       <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
           <h4><div>' . $p['title'] . '</div></h4>
@@ -75,7 +75,7 @@ function buildHtmlNewProducts()
   foreach ($newProducts as $p) {
     echo '
     <div class="col-md-3">
-    <div class="my-list">
+    <div class="product-style">
       <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
           <h4><div>' . $p['title'] . '</div></h4>
@@ -98,7 +98,7 @@ function buildHtmlTopSellerProducts()
   foreach ($newProducts as $p) {
     echo '
     <div class="col-md-3">
-      <div class="my-list thumbnail" onclick="window.location=\'product.php?id=' . $p['id'] . '\'">
+      <div class="top-sellers-style thumbnail" onclick="window.location=\'product.php?id=' . $p['id'] . '\'">
         <div class="bg-primary input-lg">' . $p['title'] . '</div>
         <div class="product-image position-relative">
             <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
