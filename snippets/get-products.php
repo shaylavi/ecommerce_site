@@ -2,17 +2,38 @@
 require_once 'db-connection.php';
 require_once 'class-definitions.php';
 
+function buildHtmlCategories()
+{
+  $newProducts = fetchAllCategories();
+  $activeClass = '';
+  $productCategory = null;
+
+  if (sizeof($_GET) > 0) {
+    $productCategory = $_GET['cat'];
+  }
+  foreach ($newProducts as $p) {
+    if ($productCategory != null && $p['id'] == $productCategory)
+      $activeClass = 'active';
+    else
+      $activeClass = '';
+
+    echo '
+    <a href="products.php?cat=' . $p['id'] . '" class="list-group-item ' . $activeClass . '">' . $p['title'] . '</a>
+  ';
+  }
+}
+
 function buildHtmlProducts($categoryId = null)
 {
   $newProducts = fetchAllProducts($categoryId);
 
   foreach ($newProducts as $p) {
     echo '
-    <div class="col-md-4">
+    <div class="col-md-3" id="product-' . $p['id'] . '">
     <div class="my-list">
       <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
-          <h4><div>' . $p['title'] . '</div></h4>
+          <div><h4><b>' . $p['title'] . '</b></h4></div>
           <p> ' . $p['description'] . ' </p>
           <div class="product-buttons">
               <a href="product.php?id=' . $p['id'] . '" class="btn btn-info">Deatil</a>
@@ -31,7 +52,7 @@ function buildHtmlSimilarProducts($id)
 
   foreach ($similarProducts as $p) {
     echo '
-    <div class="col-md-3">
+    <div class="col-md-4">
     <div class="my-list">
       <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
@@ -91,9 +112,28 @@ function buildHtmlTopSellerProducts()
   }
 }
 
+function fetchAllCategories()
+{
+  $query = makeQuery("SELECT * FROM Categorys");
+  $quesryResults = array();
+
+  while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+    $quesryResults[] = array(
+      "id" => $row["CategoryID"],
+      "title" => $row["Title"]
+    );
+  }
+
+  $parsedResults = array();
+  foreach ($quesryResults as $p) {
+    $parsedResults[] = json_decode(safe_json_encode($p), true);
+  }
+  return $parsedResults;
+}
+
 function fetchAllProducts($category = null)
 {
-  if ($category == null || $category == '' ) {
+  if ($category == null || $category == '') {
     $query = makeQuery("SELECT * FROM Products");
   } else {
     $query = makeQuery("SELECT * FROM Products WHERE CategoryID = " . $category);
@@ -105,11 +145,11 @@ function fetchAllProducts($category = null)
     $quesryResults[] = array(
       "photo" => $row["ImageUrl"],
       "alt" => $row["ImageAlt"],
-      "title" => substr($row["Title"], 0, 18) . " ..",
+      "title" => strlen($row["Title"]) > 18 ? substr($row["Title"], 0, 18) . ".." : $row["Title"],
       "id" => $row["ProductID"],
       "price" => $row["Price"],
       // "category" => $row["CategoryTitle"],
-      "description" => substr($row["Description"], 0, 70) . " ..."
+      "description" => strlen($row["Description"]) > 70 ? substr($row["Description"], 0, 70) . ".." : $row["Description"]
     );
   }
 
@@ -122,27 +162,30 @@ function fetchAllProducts($category = null)
 
 function fetchProduct($id)
 {
-  $query = makeQuery("SELECT * FROM Products WHERE ProductID = " . $id);
-  $quesryResults = array();
+  if ($id != null) {
+    $query = makeQuery("SELECT * FROM Products WHERE ProductID = " . $id);
+    $quesryResults = array();
 
-  while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-    $quesryResults = array(
-      "photo" => $row["ImageUrl"],
-      "alt" => $row["ImageAlt"],
-      "title" => $row["Title"],
-      "id" => $row["ProductID"],
-      "price" => $row["Price"],
-      // "category" => $row["CategoryTitle"],
-      "description" => $row["Description"]
-    );
-  }
+    while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+      $quesryResults = array(
+        "photo" => $row["ImageUrl"],
+        "alt" => $row["ImageAlt"],
+        "title" => $row["Title"],
+        "id" => $row["ProductID"],
+        "price" => $row["Price"],
+        // "category" => $row["CategoryTitle"],
+        "description" => $row["Description"]
+      );
+    }
 
-  $parsedResults = array();
-  foreach ($quesryResults as $key => $p) {
-    $parsedResults += array($key => json_decode(safe_json_encode($p), true));
-  }
-  return $parsedResults;
-  // echo safe_json_encode($parsedResults);  // To be used for JS callback
+    $parsedResults = array();
+    foreach ($quesryResults as $key => $p) {
+      $parsedResults += array($key => json_decode(safe_json_encode($p), true));
+    }
+    return $parsedResults;
+    // echo safe_json_encode($parsedResults);  // To be used for JS callback
+  } else
+    return null;
 }
 
 function fetchSimilarProducts($id)
@@ -155,11 +198,11 @@ function fetchSimilarProducts($id)
     $quesryResults[] = array(
       "photo" => $row["ImageUrl"],
       "alt" => $row["ImageAlt"],
-      "title" => substr($row["Title"], 0, 20) . " ..",
+      "title" => strlen($row["Title"]) > 18 ? substr($row["Title"], 0, 18) . ".." : $row["Title"],
       "id" => $row["ProductID"],
       "price" => $row["Price"],
       // "category" => $row["CategoryTitle"],
-      "description" => substr($row["Description"], 0, 70) . " ..."
+      "description" => strlen($row["Description"]) > 70 ? substr($row["Description"], 0, 70) . ".." : $row["Description"]
     );
   }
 
@@ -185,11 +228,11 @@ function fetchProducts($totalProducts, $sorted = false)
     $quesryResults[] = array(
       "photo" => $row["ImageUrl"],
       "alt" => $row["ImageAlt"],
-      "title" => substr($row["Title"], 0, 20) . " ..",
+      "title" => strlen($row["Title"]) > 18 ? substr($row["Title"], 0, 18) . ".." : $row["Title"],
       "id" => $row["ProductID"],
       "price" => $row["Price"],
       // "category" => $row["CategoryTitle"],
-      "description" => substr($row["Description"], 0, 70) . " ..."
+      "description" => strlen($row["Description"]) > 70 ? substr($row["Description"], 0, 70) . ".." : $row["Description"]
     );
   }
 

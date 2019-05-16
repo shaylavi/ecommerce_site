@@ -2,8 +2,16 @@
 session_start();
 include 'snippets/get-products.php';
 
-$productId = $_GET['id'];
+$productId = null;
+if (sizeof($_GET) > 0) {
+  $productId = $_GET['id'];
+}
 $productDetails = fetchProduct($productId);
+
+if ($productDetails == null){
+  header("Location: index.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

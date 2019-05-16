@@ -1,10 +1,25 @@
 <?php
 session_start();
 include 'snippets/get-products.php';
+$activeClass = '';
+$productCategory = null;
+
 if (sizeof($_GET) > 0) {
   $productCategory = $_GET['cat'];
 } else {
   $productCategory = null;
+}
+
+function activeClassLogic($productCategory)
+{
+  $activeClass = '';
+
+  if ($productCategory == null)
+    $activeClass = 'active';
+  else
+    $activeClass = '';
+
+  echo $activeClass;
 }
 ?>
 <!DOCTYPE html>
@@ -33,15 +48,26 @@ if (sizeof($_GET) > 0) {
   <?php include 'header.php'; ?>
   <div style="height: 50px"></div>
 
-  <div class="container">
+  <div class="container" style="width: 90% !important;">
     <div class="row">
       <div class="col-md-12 product-image">
-        This line will include filters to be used
+        <div class="col-md-3 d-flex flex-row">
+          <div class="col-md-4 d-flex flex-row text-center">
+            Filter by keywords:
+          </div>
+          <div class="col-md-8 d-flex flex-row text-left">
+            <input type="text" id="text-filter" class="form-control form-control-sm">
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-2">
-        test
+        <h4><b>Filter by category:</b></h4>
+        <div class="list-group" style="margin-top:20px">
+          <a href="products.php" class="list-group-item <?php activeClassLogic($productCategory); ?>">All Categories</a>
+          <?php buildHtmlCategories(); ?>
+        </div>
       </div>
       <div class="col-md-10">
         <div class="container-fluid">
@@ -52,6 +78,22 @@ if (sizeof($_GET) > 0) {
       </div>
     </div>
   </div>
+
+  <script>
+    function filterProducts() {
+      var products = $("div[id^=product-]");
+      for (let p=0; p<products.length;p++) {
+        if (products[p].innerText != undefined && products[p].innerText != '' && products[p].innerText.toString().toLowerCase().indexOf($("#text-filter").val()) < 0) {
+          products[p].style.display = 'none';
+        } else {
+          products[p].style.display = 'block';
+        }
+      }
+    }
+
+    var textFilter = $("#text-filter");
+    textFilter.on("keyup", filterProducts)
+  </script>
 
   <?php include 'footer.php'; ?>
 
