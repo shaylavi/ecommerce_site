@@ -1,7 +1,7 @@
 <?php
 require_once 'db-connection.php';
 require_once 'class-definitions.php';
-
+const showMaterials = true;
 function buildHtmlCategories()
 {
   $newProducts = fetchAllCategories();
@@ -31,7 +31,9 @@ function buildHtmlProducts($categoryId = null)
     echo '
     <div class="col-md-3" id="product-' . $p['id'] . '">
     <div class="product-style">
-      <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
+      <div class="new-products panel shadow p-3 mb-5 bg-white rounded">' .
+      (showMaterials ? materialHtml($p["materials"]) : "")
+      . '
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
           <div><h4><b>' . $p['title'] . '</b></h4></div>
           <p> ' . $p['description'] . ' </p>
@@ -54,7 +56,9 @@ function buildHtmlSimilarProducts($id)
     echo '
     <div class="col-md-4">
     <div class="product-style">
-      <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
+      <div class="new-products panel shadow p-3 mb-5 bg-white rounded">' .
+      (showMaterials ? materialHtml($p["materials"]) : "")
+      . '
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
           <h4><div>' . $p['title'] . '</div></h4>
           <p> ' . $p['description'] . ' </p>
@@ -76,7 +80,9 @@ function buildHtmlNewProducts()
     echo '
     <div class="col-md-3">
     <div class="product-style">
-      <div class="new-products panel shadow p-3 mb-5 bg-white rounded">
+      <div class="new-products panel shadow p-3 mb-5 bg-white rounded">' .
+      (showMaterials ? materialHtml($p["materials"]) : "")
+      . '
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
           <h4><div>' . $p['title'] . '</div></h4>
           <p> ' . $p['description'] . ' </p>
@@ -90,7 +96,14 @@ function buildHtmlNewProducts()
       ';
   }
 }
-
+function materialHtml($materials) {
+  $html = '<div class="material-holder">';
+  foreach ($materials as $material) {
+    $html .= '<span class="label label-default">'.$material.'</span>';
+  }
+  $html .= '</div>';
+  return $html;
+}
 function buildHtmlTopSellerProducts()
 {
   $newProducts = fetchProducts(4);
@@ -99,9 +112,11 @@ function buildHtmlTopSellerProducts()
     echo '
     <div class="col-md-3">
       <div class="top-sellers-style thumbnail" onclick="window.location=\'product.php?id=' . $p['id'] . '\'">
-        <div class="bg-primary input-lg">' . $p['title'] . '</div>
+        <div class="bg-primary input-lg">' . $p['title'] . '</div>' .
+        (showMaterials ? materialHtml($p["materials"]) : "")
+        . '
         <div class="product-image position-relative">
-            <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
+            <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" /> 
         </div>
         <div class="bg-primary input-lg">
             <a href="product.php?id=' . $p['id'] . '" style="color:white">Details</a>
@@ -149,17 +164,32 @@ function fetchAllProducts($category = null)
       "id" => $row["ProductID"],
       "price" => $row["Price"],
       // "category" => $row["CategoryTitle"],
-      "description" => strlen($row["Description"]) > 70 ? substr($row["Description"], 0, 70) . ".." : $row["Description"]
+      "description" => strlen($row["Description"]) > 70 ? substr($row["Description"], 0, 70) . ".." : $row["Description"],
+      "materials" => array()
     );
   }
-
+  $quesryResults = applyMaterials($quesryResults);
   $parsedResults = array();
   foreach ($quesryResults as $p) {
     $parsedResults[] = json_decode(safe_json_encode($p), true);
   }
+
   return $parsedResults;
 }
-
+function applyMaterials($queryResults) {
+  if (showMaterials) {
+    $queryMaterials = makeQuery("SELECT m.MaterialID, m.Title, p.ProductID FROM Product_Material p, Materials m WHERE m.MaterialID = p.MaterialID");
+    while ($row = mysqli_fetch_array($queryMaterials, MYSQLI_ASSOC)) {
+      for ($i = 0; $i < count($queryResults); $i++) {
+        if ($queryResults[$i]["id"] == $row["ProductID"]){
+          $queryResults[$i]["materials"][] = $row["Title"];
+          break;
+        } 
+      }
+    }
+  }
+  return $queryResults;
+}
 function fetchProduct($id)
 {
   if ($id != null) {
@@ -174,7 +204,8 @@ function fetchProduct($id)
         "id" => $row["ProductID"],
         "price" => $row["Price"],
         // "category" => $row["CategoryTitle"],
-        "description" => $row["Description"]
+        "description" => $row["Description"],
+        "materials" => array()
       );
     }
 
@@ -202,9 +233,11 @@ function fetchSimilarProducts($id)
       "id" => $row["ProductID"],
       "price" => $row["Price"],
       // "category" => $row["CategoryTitle"],
-      "description" => strlen($row["Description"]) > 70 ? substr($row["Description"], 0, 70) . ".." : $row["Description"]
+      "description" => strlen($row["Description"]) > 70 ? substr($row["Description"], 0, 70) . ".." : $row["Description"],
+      "materials" => array()
     );
   }
+  $quesryResults = applyMaterials($quesryResults);
 
   $parsedResults = array();
   foreach ($quesryResults as $p) {
@@ -232,10 +265,12 @@ function fetchProducts($totalProducts, $sorted = false)
       "id" => $row["ProductID"],
       "price" => $row["Price"],
       // "category" => $row["CategoryTitle"],
-      "description" => strlen($row["Description"]) > 70 ? substr($row["Description"], 0, 70) . ".." : $row["Description"]
+      "description" => strlen($row["Description"]) > 70 ? substr($row["Description"], 0, 70) . ".." : $row["Description"],
+      "materials" => array()
     );
   }
 
+  $quesryResults = applyMaterials($quesryResults);
   $parsedResults = array();
   foreach ($quesryResults as $p) {
     $parsedResults[] = json_decode(safe_json_encode($p), true);
