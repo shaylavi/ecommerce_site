@@ -83,7 +83,7 @@ function activeClassLogic($productCategory)
     function filterProducts() {
       var products = $("div[id^=product-]");
       for (let p=0; p<products.length;p++) {
-        if (products[p].innerText != undefined && products[p].innerText != '' && products[p].innerText.toString().toLowerCase().indexOf($("#text-filter").val()) < 0) {
+        if (products[p].innerText != undefined && products[p].innerText != '' && products[p].innerText.toString().toLowerCase().indexOf($("#text-filter").val().toLowerCase()) < 0) {
           products[p].style.display = 'none';
         } else {
           products[p].style.display = 'block';
