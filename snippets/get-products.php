@@ -99,7 +99,7 @@ function buildHtmlNewProducts()
 function materialHtml($materials) {
   $html = '<div class="material-holder">';
   foreach ($materials as $material) {
-    $html .= '<span class="label label-default">'.$material.'</span>';
+    $html .= '<span class="label label-default" style="background-color:'.$material["backColour"].';color:'.$material["textColour"].'">'.$material["title"].'</span>';
   }
   $html .= '</div>';
   return $html;
@@ -178,11 +178,15 @@ function fetchAllProducts($category = null)
 }
 function applyMaterials($queryResults) {
   if (showMaterials) {
-    $queryMaterials = makeQuery("SELECT m.MaterialID, m.Title, p.ProductID FROM Product_Material p, Materials m WHERE m.MaterialID = p.MaterialID");
+    $queryMaterials = makeQuery("SELECT m.MaterialID, m.Title, p.ProductID, m.DisplayColour, m.DisplayTextColour FROM Product_Material p, Materials m WHERE m.MaterialID = p.MaterialID");
     while ($row = mysqli_fetch_array($queryMaterials, MYSQLI_ASSOC)) {
       for ($i = 0; $i < count($queryResults); $i++) {
         if ($queryResults[$i]["id"] == $row["ProductID"]){
-          $queryResults[$i]["materials"][] = $row["Title"];
+          $queryResults[$i]["materials"][] = array(
+            "title" => $row["Title"],
+            "backColour" => $row["DisplayColour"],
+            "textColour" => $row["DisplayTextColour"]
+          );
           break;
         } 
       }
