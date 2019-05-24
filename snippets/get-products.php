@@ -35,9 +35,10 @@ function buildHtmlProducts($categoryId = null)
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
           <div><h4><b>' . $p['title'] . '</b></h4></div>
           <p> ' . $p['description'] . ' </p>
-          <div class="product-buttons">
+          <div class="product-buttons" id="item-' . $p['id'] . '">
               <a href="product.php?id=' . $p['id'] . '" class="btn btn-info">Deatil</a>
-              <a href="#" class="btn btn-default">Add To Cart</a>
+              <button class="btn btn-default cart-btn" id="cart-id-' . $p['id'] . '" onclick="addToCart(' . $p['id'] . ')">
+              Add To Cart</button>
           </div>
       </div>
       </div>
@@ -58,9 +59,10 @@ function buildHtmlSimilarProducts($id)
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
           <h4><div>' . $p['title'] . '</div></h4>
           <p> ' . $p['description'] . ' </p>
-          <div class="product-buttons">
+          <div class="product-buttons" id="item-' . $p['id'] . '">
               <a href="product.php?id=' . $p['id'] . '" class="btn btn-info">Deatil</a>
-              <a href="#" class="btn btn-default">Add To Cart</a>
+              <button class="btn btn-default cart-btn" id="cart-id-' . $p['id'] . '" onclick="addToCart(' . $p['id'] . ')">
+              Add To Cart</button>
           </div>
       </div>
       </div>
@@ -80,9 +82,10 @@ function buildHtmlNewProducts()
           <img src="' . $p['photo'] . '" alt="' . $p['alt'] . '" />
           <h4><div>' . $p['title'] . '</div></h4>
           <p> ' . $p['description'] . ' </p>
-          <div class="product-buttons">
+          <div class="product-buttons" id="item-' . $p['id'] . '">
               <a href="product.php?id=' . $p['id'] . '" class="btn btn-info">Deatil</a>
-              <a href="#" class="btn btn-default">Add To Cart</a>
+              <button class="btn btn-default cart-btn" id="cart-id-' . $p['id'] . '" onclick="addToCart(' . $p['id'] . ')">
+              Add To Cart</button>
           </div>
       </div>
       </div>

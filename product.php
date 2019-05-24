@@ -1,6 +1,6 @@
 <?php
-  include 'snippets/set-url.php';
-  include 'snippets/get-products.php';
+include 'snippets/set-url.php';
+include 'snippets/get-products.php';
 
 $productId = null;
 if (sizeof($_GET) > 0) {
@@ -8,7 +8,7 @@ if (sizeof($_GET) > 0) {
 }
 $productDetails = fetchProduct($productId);
 
-if ($productDetails == null){
+if ($productDetails == null) {
   header("Location: index.php");
 }
 
@@ -47,28 +47,31 @@ if ($productDetails == null){
           <img src="<?php echo $productDetails["photo"]; ?>" alt="<?php echo $productDetails["alt"]; ?>" />
         </div>
         <div class="col-md-1"></div>
-        <div class="col-md-7 product-details">
+        <div class="col-md-7 product-details" id="item-<?php echo $productDetails['id']; ?>">
           <h2><?php echo $productDetails["title"]; ?></h2>
           <h3>Price: AU$ <?php echo $productDetails["price"]; ?></h3>
           <h4><?php echo $productDetails["description"]; ?></h4>
           <div style="margin-top: 40px">
-            <button type="button" class="w-40 btn btn-primary" >Add to cart</span>
+            <button class="w-40 btn btn-primary cart-btn-product-page" id="cart-id-<?php echo $productDetails['id'] ?>" onclick="addToCart(<?php echo $productDetails['id'] ?>, true)">
+              Add To Cart</button>
           </div>
           <?php
           ?>
 
         </div>
         <div class="row">
-        <div class="col-md-12" style="margin-top: 50px;">
-          <h1>Similar Products you might like:</h1>
+          <div class="col-md-12" style="margin-top: 50px;">
+            <h1>Similar Products you might like:</h1>
             <?php buildHtmlSimilarProducts($productId); ?>
-        </div>
+          </div>
         </div>
       </div>
       <div class="col-md-2"></div>
     </div>
   </div>
-
+  <script>
+    // $('.cart-button').click(function(){alert();});
+  </script>
   <?php include 'footer.php'; ?>
 
 </body>

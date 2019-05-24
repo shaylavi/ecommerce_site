@@ -33,9 +33,11 @@
             echo '<li><a href="login.php">Login</a></li>';
           }
         ?>
-        <li>
-          <a href="cart.php"></span>
-            Cart</a>
+        <li style="display: flex; align-items: end;">
+          <a href="cart.php">
+            Cart
+          </a>
+          <span class="badge" style="position:absolute; right: -10px" id="cart-badge"><?php if (isset($_SESSION['cart-items']) === true) echo strval(count($_SESSION['cart-items'])); ?></span>
         </li>
         <li>
           <a href="search.php"><span class="glyphicon glyphicon-search"></span>
