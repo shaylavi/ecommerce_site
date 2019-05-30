@@ -1,6 +1,7 @@
 <?php
-require_once 'db-connection.php';
-require_once 'class-definitions.php';
+  include_once dirname(__DIR__) . '\\db-connection.php';
+  include_once dirname(__DIR__) . '\\snippets\\class-definitions.php';
+
 const showMaterials = true;
 function buildHtmlCategories()
 {
@@ -146,7 +147,7 @@ function fetchAllCategories()
   return $parsedResults;
 }
 
-function fetchAllProducts($category = null)
+function fetchAllProducts($category = null, $titleLimit = 18, $descLimit = 70)
 {
   if ($category == null || $category == '') {
     $query = makeQuery("SELECT * FROM Products");
@@ -160,11 +161,11 @@ function fetchAllProducts($category = null)
     $quesryResults[] = array(
       "photo" => $row["ImageUrl"],
       "alt" => $row["ImageAlt"],
-      "title" => strlen($row["Title"]) > 18 ? substr($row["Title"], 0, 18) . ".." : $row["Title"],
+      "title" => strlen($row["Title"]) > $titleLimit ? substr($row["Title"], 0, $titleLimit) . ".." : $row["Title"],
       "id" => $row["ProductID"],
       "price" => $row["Price"],
       // "category" => $row["CategoryTitle"],
-      "description" => strlen($row["Description"]) > 70 ? substr($row["Description"], 0, 70) . ".." : $row["Description"],
+      "description" => strlen($row["Description"]) > $descLimit ? substr($row["Description"], 0, $descLimit) . ".." : $row["Description"],
       "materials" => array()
     );
   }

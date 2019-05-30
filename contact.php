@@ -33,10 +33,8 @@ session_start();
       "esri/Map",
       "esri/views/MapView",
       "esri/layers/GraphicsLayer",
-      "esri/Graphic",
-      "esri/widgets/CoordinateConversion"
-    ], function(Map, MapView, GraphicsLayer, Graphic, CoordinateConversion) {
-      console.log(CoordinateConversion);
+      "esri/Graphic"
+    ], function(Map, MapView, GraphicsLayer, Graphic) {
       var symbol = {
         type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
         style: "square",
@@ -62,7 +60,7 @@ session_start();
       var graphicsLayer = new GraphicsLayer();
       map.add(graphicsLayer);
       var points = [];
-      var plength = 10000;
+      var plength = 100;
       var range = .01;
       for (var i = 0; i < plength; i++) {
 
@@ -97,7 +95,7 @@ session_start();
 
 <body>
 
-  <?php include 'header.php'; ?>
+  <?php include dirname(__DIR__) . '/' .'header.php'; ?>
   <div style="height: 50px"></div>
 
   <div class="container ">
@@ -105,7 +103,7 @@ session_start();
 
   </div>
 
-  <?php include 'footer.php'; ?>
+  <?php include dirname(__DIR__) . '/' .'footer.php'; ?>
 
 </body>
 
