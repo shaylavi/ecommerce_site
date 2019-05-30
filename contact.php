@@ -95,7 +95,7 @@ session_start();
 
 <body>
 
-  <?php include dirname(__DIR__) . '/' .'header.php'; ?>
+  <?php include 'header.php'; ?>
   <div style="height: 50px"></div>
 
   <div class="container ">
@@ -103,7 +103,7 @@ session_start();
 
   </div>
 
-  <?php include dirname(__DIR__) . '/' .'footer.php'; ?>
+  <?php include 'footer.php'; ?>
 
 </body>
 
