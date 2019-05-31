@@ -264,6 +264,7 @@
     min-width: 250px;
     min-height: 327px;
 }
+
 .top-sellers-style {
     padding: 0px;
     border: 1px solid #f5efef;
@@ -375,8 +376,20 @@
     align-items: center;
 }
 
+.p-auto {
+    padding: auto;
+}
+
+.m-auto {
+    margin: auto;
+}
+
 .m-0 {
     margin: 0px;
+}
+
+.mb-2 {
+    margin-bottom: 25px;
 }
 
 .w-40 {
@@ -385,6 +398,11 @@
 
 .w-60 {
     width: 60%;
+}
+
+.contact .icon {
+    width: 80px;
+    height: auto;
 }
 
 
@@ -435,7 +453,7 @@
 .flexed-container {
     min-height: 61vh;
     margin-right: auto;
-    margin-left: auto;    
+    margin-left: auto;
     width: 90%;
     display: flex;
     justify-content: center;
@@ -447,6 +465,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .product-image img {
     max-width: 350px;
 }

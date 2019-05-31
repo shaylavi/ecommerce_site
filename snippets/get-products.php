@@ -1,6 +1,6 @@
 <?php
-  include_once dirname(__DIR__) . '\\db-connection.php';
-  include_once dirname(__DIR__) . '\\snippets\\class-definitions.php';
+  include_once dirname(__DIR__) . '/db-connection.php';
+  include_once dirname(__DIR__) . '/snippets/class-definitions.php';
 
 const showMaterials = true;
 function buildHtmlCategories()
