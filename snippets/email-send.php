@@ -6,7 +6,7 @@
 
     if( isset($_POST['firstName']) && isset($_POST['email']) && isset($_POST['topic']) && isset($_POST['message']))
     {
-        sendEmail("nick.hulley98@gmail.com", 'Eco-Traveler: '.$_POST['topic'] .' from '.$_POST['firstName'],"from: " . $_POST['email']."<br/><br/>".$_POST['message']);
+        sendEmail("", 'Eco-Traveler: '.$_POST['topic'] .' from '.$_POST['firstName'],"from: " . $_POST['email']."<br/><br/>".$_POST['message']);
     } else {
     }
     function sendEmail($recipient, $subject, $body) {
