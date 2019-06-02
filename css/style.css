@@ -593,3 +593,19 @@
     bottom: 7rem;
   }
 }
+td {
+  padding: 15px;
+}
+
+.qty-input {
+  width: 35px;
+  text-align: center;
+  height: 35px;
+}
+
+.qty-div {
+  width: 25px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}

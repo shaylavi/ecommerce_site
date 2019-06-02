@@ -1,5 +1,5 @@
 <?php
-require_once 'db-connection.php';
+require_once dirname(__DIR__) . '/db-connection.php';
 require_once 'class-definitions.php';
 const showMaterials = true;
 function buildHtmlCategories()
