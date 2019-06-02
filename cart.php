@@ -198,8 +198,12 @@ session_start();
     function RemoveProduct(elementId) {
       UpdateCart(elementId, 0);
 
-      $('#product-tr-' + elementId).remove();
-      $('#product-hr-' + elementId).remove();
+      $('#product-tr-' + elementId).hide('slow', function(){ 
+        $('#product-tr-' + elementId).remove();
+      });
+      $('#product-hr-' + elementId).hide('slow', function(){ 
+        $('#product-hr-' + elementId).remove();
+      });
     }
 
     function UpdateCart(productId, qty) {
