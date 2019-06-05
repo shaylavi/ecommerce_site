@@ -1,6 +1,7 @@
 <?php
 require_once 'snippets/class-definitions.php';
 require_once 'db-config.php';
+include_once 'snippets/email-send.php';
 
 function openConnection()
 {
@@ -78,25 +79,131 @@ function getAllProducts()
     }
     return $products;
 }
-function findCustomer($email) {
-    $connection = openConnection();
-     
-    $email = $connection->real_escape_string($email);
+function guidv4()
+{
+    if (function_exists('com_create_guid') === true)
+        return trim(com_create_guid(), '{}');
 
-    $query = $connection->prepare("SELECT Email, Password, FirstName, LastName FROM `Customers` WHERE Email = ?");
-    $query->bind_param("s",$email);
-    
+    $data = openssl_random_pseudo_bytes(16);
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 0100
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // set bits 6-7 to 10
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+}
+function generateResetPassword($email, $path)
+{
+    if (findCustomer($email) != false) {
+        try {
+            $connection = openConnection();
+
+            $email2 = $connection->real_escape_string($email);
+            $token = guidv4();
+            $timestamp = date('Y-m-d G:i:s');
+
+            $query = $connection->prepare("INSERT INTO ResetPassword (tokenID, Email, created) VALUES (?, ?, ?)");
+            $query->bind_param("sss", $token, $email2, $timestamp);
+
+            $query->execute();
+            $query->close();
+
+
+            $emailHead = 'Eco-Travellar Password Reset';
+            $emailBody = '
+
+        <html>
+            <head>
+            <title> ' . $emailHead . '</title>
+            </head>
+            <body>
+            <p>To Reset your password, please click <a href=\"'.$path.'?token=' . $token . '\">here</a></p>
+            <br>
+            <p> Alteratively, open this in a new window: '.$path.'?token=' . $token . '
+            <p><b>Note: you have 15 minutes to change your password due to security reasons</b></p>
+            </body>
+        </html>
+        
+        ';
+
+            sendEmail($email, $emailHead, $emailBody);
+
+            return 200;
+        } catch (\Throwable $th) {
+            return "Error occured";
+        }
+    } else {
+        return "Email was not found";
+    }
+}
+function validToken($token)
+{
+    $connection = openConnection();
+    $token = $connection->real_escape_string($token);
+
+    $query = $connection->prepare("SELECT * FROM `ResetPassword` WHERE tokenID = ?");
+    $query->bind_param("s", $token);
+
     $query->execute();
 
     $result = $query->get_result();
-    
+    $query->close();
+
+
     $numberOfResults = $result->num_rows;
     if ($numberOfResults > 0) {
         $row = $result->fetch_assoc();
-        $customer = new User($row["Email"],$row["FirstName"],$row["LastName"],$row["Password"]);
+
+        $connection = openConnection();
+
+        $query = $connection->prepare("DELETE FROM `ResetPassword` WHERE tokenID = ?");
+        $query->bind_param("s", $token);
+
+        $query->execute();
+
+        $result = $query->get_result();
+        $query->close();
+
+        return $row["Email"];
+    } else {
+        return false;
+    }
+}
+function changePassword($token, $newPassword)
+{
+    $email = validToken($token);
+    if ($email != false) {
+        $connection = openConnection();
+        
+        $query = $connection->prepare("UPDATE `Customers` SET Password = ? WHERE Email = ?");
+        $query->bind_param("ss", $newPassword, $email);
+
+        $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        $query->execute();
+        $query->close();
+
+        return 200;
+    } else {
+        return "Token is not valid";
+    }
+}
+function findCustomer($email)
+{
+    $connection = openConnection();
+    $email = $connection->real_escape_string($email);
+
+    $query = $connection->prepare("SELECT Email, Password, FirstName, LastName FROM `Customers` WHERE Email = ?");
+    $query->bind_param("s", $email);
+
+    $query->execute();
+
+    $result = $query->get_result();
+
+    $query->close();
+    $numberOfResults = $result->num_rows;
+    if ($numberOfResults > 0) {
+        $row = $result->fetch_assoc();
+        $customer = new User($row["Email"], $row["FirstName"], $row["LastName"], $row["Password"]);
         return $customer;
     } else {
         return false;
     }
 }
-

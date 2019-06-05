@@ -81,8 +81,9 @@ session_start();
                         <label class="control-label" for="password">Password</label>
                         <input name="password" type="password" class="form-control" id="password" aria-describedby="passwordStatus">
                       </div>
+                      <a href="new-password.php" >Forgot your password?</a><br><br>
                       <div class="form-group ">
-                        <input value="Sign in" type="submit" class="w-100 btn btn-primary" />
+                        <input value="Sign in" type="submit" class="w-100 btn btn-primary" id="submit" />
                       </div>
                       <div class="form-group">
                         <label class="control-label" id="passwordFailedNotice" style="color:red;"></label>
@@ -111,7 +112,7 @@ session_start();
                       </div>
                       <div class="form-group ">
                         <input value="Register" type="submit" class="col-md-9 btn btn-primary" />
-                        <input value="Clear" type="button" onclick="clearText();" class="col-md-2 pull-right btn btn-default" />
+                        <input value="Clear" type="button" onclick="clearText();" class="col-md-2 pull-right btn btn-default" id="submit"/>
                       </div>
                       <div class="form-group">
                         <label class="control-label" id="registerFailedNotice" style="color:red;"></label>
@@ -130,6 +131,7 @@ session_start();
       $(document).ready(function() {
         $('#loginform').submit(function(e) {
           $("#passwordFailedNotice").html("");
+          $("#submit").hide();
           e.preventDefault();
           $.ajax({
             type: "POST",
@@ -142,6 +144,7 @@ session_start();
                 window.location = data.newURL;
               } else {
                 $("#passwordFailedNotice").html(data.message);
+               $("#submit").show();
               }
             }
           });
@@ -149,6 +152,7 @@ session_start();
 
         $('#registerform').submit(function(e) {
           e.preventDefault();
+          $("#submit").hide();
           $.ajax({
             type: "POST",
             url: 'snippets/handle-register.php',
@@ -162,6 +166,7 @@ session_start();
               } else {
                 registerFailedNotice
                 $("#registerFailedNotice").html(data.message);
+               $("#submit").show();
               }
             }
           });

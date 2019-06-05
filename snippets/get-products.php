@@ -1,12 +1,7 @@
 <?php
-<<<<<<< HEAD
   include_once dirname(__DIR__) . '/db-connection.php';
   include_once dirname(__DIR__) . '/snippets/class-definitions.php';
 
-=======
-require_once dirname(__DIR__) . '/db-connection.php';
-require_once 'class-definitions.php';
->>>>>>> origin/dev
 const showMaterials = true;
 function buildHtmlCategories()
 {
