@@ -149,12 +149,14 @@ function validToken($token)
 
     $numberOfResults = $result->num_rows;
     if ($numberOfResults > 0) {
+
+        //  TODO: Use $row["created"] to determine if it has been 15 minutes 
         $row = $result->fetch_assoc();
 
         $connection = openConnection();
 
-        $query = $connection->prepare("DELETE FROM `ResetPassword` WHERE tokenID = ?");
-        $query->bind_param("s", $token);
+        $query = $connection->prepare("DELETE FROM `ResetPassword` WHERE tokenID = ? OR Email = ?");
+        $query->bind_param("ss", $token, $row["Email"]);
 
         $query->execute();
 

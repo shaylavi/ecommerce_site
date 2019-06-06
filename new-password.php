@@ -59,22 +59,22 @@ session_start();
                         <div id="load"></div>
                         <?php if ($changingPassword) {
                             echo ' 
-                            <form class="" id="resetPassword" method="post">
+                        <form class="" id="resetPassword" method="post">
 
                             <div class="form-group ">
                                 <label class="control-label" for="password">New Password</label>
-                                <input name="password" type="password" class="form-control" id="password" aria-describedby="passwordStatus">
+                                <input name="password" type="password"  onchange="passwordsMatch();" class="form-control" id="password" aria-describedby="passwordStatus">
                             </div>
 
                             <div class="form-group ">
                                 <label class="control-label" for="passwordVerify">Verify Password</label>
-                                <input type="password" class="form-control" id="passwordVerify" aria-describedby="passwordStatus">
+                                <input type="password" class="form-control" onchange="passwordsMatch();" id="passwordVerify" aria-describedby="passwordStatus">
                             </div>
                             <hr>
-                            <button type="submit" class="w-100 btn btn-warning">Reset Password</button>
+                            <button type="submit" id="resetPasswordBtn"  class="w-100 btn btn-disabled">Reset Password</button>
 
                             <div class="form-group">
-                                <label class="control-label" id="FailedNotice" style="color:red;"></label>
+                                <label class="control-label" id="warning" style="color:red;"></label>
                             </div>
                         </form>
                             ';
@@ -88,7 +88,7 @@ session_start();
                             <button type="submit" class="w-100 btn btn-warning">Send Email</button>
 
                             <div class="form-group">
-                                <label class="control-label" id="FailedNotice" style="color:red;"></label>
+                                <label class="control-label" id="warning" style="color:red;"></label>
                             </div>
                         </form>';
                         }
@@ -102,47 +102,70 @@ session_start();
     <script>
         var token = '<?php echo $token ?>';
         var loadIcon = `<img src="load.gif" style="width:100px; height:100px;">`;
+        $("#load").html(loadIcon);
+        $("#load").hide();
         var pathname = window.location.href;
+        if (token != '') document.getElementById("resetPasswordBtn").disabled = false;
 
-        $('#resetPassword').submit(function(e) {
+        function passwordsMatch() {
             if ($("#passwordVerify").val() == $("#password").val()){
-                $("#load").html(loadIcon);
+                document.getElementById("resetPasswordBtn").disabled = false;
+                $("#resetPasswordBtn").removeClass('btn-disabled');
+                $("#resetPasswordBtn").addClass('btn-primary');
+                $("#warning").html("");
+                return true;
+            } else {
+                $("#warning").html("Passwords do not match");
+                document.getElementById("resetPasswordBtn").disabled = true;
+                $("#resetPasswordBtn").removeClass('btn-primary');
+                $("#resetPasswordBtn").addClass('btn-disabled');
+                return false;
+            }
+            
+        }
+        $('#resetPassword').submit(function(e) {
+            e.preventDefault();
+            if (passwordsMatch()){
                 $('#resetPassword').hide();
-                e.preventDefault();
+                $("#load").show();
                 $.ajax({
                     type: "POST",
                     url: 'snippets/handle-password-reset.php',
                     data: $(this).serialize() + "&token=" + token,
                     success: function(data) {
                         $('#resetPassword').show();
-                        $("#load").html("");
+                        $("#load").hide();
                         console.log(data);
                         if (data != 200) 
-                            alert(data);
+                            $("#warning").html(data);
                         else
-                            alert("Success");
+                        {
+                            alert("Your password has been changed");
+                            window.location = "login.php";
+                        }
                     }
                 });
             }
         });
 
         $('#sendEmail').submit(function(e) {
-            $("#load").html(loadIcon);
-            $('#sendEmail').hide();
             e.preventDefault();
+            $("#load").show();
+            $('#sendEmail').hide();
             $.ajax({
                 type: "POST",
                 url: 'snippets/handle-send-verification-email.php',
                 data: $(this).serialize() + "&path="+pathname,
                 success: function(data) {
                     $('#sendEmail').show();
-                    $("#load").html("");
+                    $("#load").hide();
                     console.log(data);
                     if (data != 200) {
                         console.log(data);
-                        alert("Something went wrong!");}
+                        $("#warning").html(data);
+                        }
                     else
-                        alert("Success");
+                        $('#sendEmail').html("<strong>A verification email has been sent to " + $("#email").val() + "</strong>");
                 }
             });
         });

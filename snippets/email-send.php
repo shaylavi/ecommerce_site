@@ -12,9 +12,6 @@
     function sendEmail($recipient, $subject, $body) {
         $mail = new PHPMailer\PHPMailer\PHPMailer();
         $mail->IsSMTP(); // enable SMTP
-        $mail->SMTPKeepAlive = true;   
-        $mail->SMTPAuth = true;
-        $mail->Port = 465;
         $mail->Username = emailUsername;
         $mail->Password = emailPassword;
         $mail->setFrom('noreply@eco-traveller.com', "Eco-Travellar");
@@ -22,24 +19,26 @@
         $mail->Subject = $subject;
         $mail->Body = $body;
         $mail->IsHTML(true);  
-    $mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
-    $mail->SMTPAutoTLS = false;
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = 587;
+        $mail->SMTPSecure = 'tls'; 
+        $mail->SMTPAutoTLS = false;
+        $mail->SMTPKeepAlive = true;   
+        $mail->SMTPAuth = true;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
 
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-        )
-    );
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
 
         //send the message, check for errors
         if (!$mail->send()) {
-            echo "ERROR: " . $mail->ErrorInfo;
+            return "ERROR: " . $mail->ErrorInfo;
         } else {
-            echo 200;
+            return true;
         }
     }
     
