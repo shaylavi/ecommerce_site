@@ -203,9 +203,36 @@ function findCustomer($email)
     $numberOfResults = $result->num_rows;
     if ($numberOfResults > 0) {
         $row = $result->fetch_assoc();
-        $customer = new User($row["Email"], $row["FirstName"], $row["LastName"], $row["Password"]);
+        $customer = new User($row["Email"], $row["FirstName"], $row["LastName"], $row["Password"], $row["UserLevel"]);
         return $customer;
     } else {
         return false;
     }
+}
+function addProduct($user, $Title, $Description, $Stock, $Price, $ImageUrl, $ImageAlt, $CategoryID, $Materials) {
+    $response = (object)'response';
+    if ($user->valid){
+        $connection = openConnection();
+
+        $query = $connection->prepare("INSERT INTO Products (Title, Description, Stock, Price, ImageUrl, ImageAlt, CategoryID) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $query->bind_param("ssidssi", $Title, $Description, $Stock, $Price, $ImageUrl, $ImageAlt, $CategoryID);
+
+        if ($query->execute()) {
+            $ID = $query->insert_id;
+            $query->close();
+            $connection = openConnection();
+            for ($i = 0; $i < sizeof($Materials); $i++) {
+                $query = $connection->prepare("INSERT INTO Product_Material (ProductID, MaterialID) VALUES (?, ?);");
+                $query->bind_param("ii", $ID, $Materials[i]);
+                $query->execute();
+            }
+        } else {
+            $query->close();
+            $response->message="Couldn't connect to database";
+        }
+        
+    } else  {
+        $response->message = "Account invalid";
+    }
+    return $response;
 }

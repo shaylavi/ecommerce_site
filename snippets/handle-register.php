@@ -17,7 +17,7 @@ session_start();
             
             $query->execute();
             $query->close();
-            $newUser = new User($email,$firstName,$lastName,$password);
+            $newUser = new User($email,$firstName,$lastName,$password, 0);
             $_SESSION['customer'] = $newUser;
             $response->user = json_encode($newUser);
             $response->success = true;

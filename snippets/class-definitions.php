@@ -5,16 +5,20 @@ class User
     public $firstName;
     public $lastName;
     private $password;
-    public function __construct($email, $firstName, $lastName, $password)
+    public $valid = false;
+    public $userLevel = 0;
+    public function __construct($email, $firstName, $lastName, $password, $userLevel = 0)
     {
         $this->email = $email;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->password = $password;
+        $this->userLevel = $userLevel;
     }
     public function isValidPassword($password) {
         $valid = password_verify($password, $this->password);
         $this->password = "";
+        $this->valid = $valid;
         return $valid;
     }
 }
