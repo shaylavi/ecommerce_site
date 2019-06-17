@@ -16,6 +16,7 @@ include 'snippets/set-url.php';
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="assets/jquery.payform.min.js" charset="utf-8"></script>
 
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/leaves.css" />
@@ -27,7 +28,7 @@ include 'snippets/set-url.php';
   <?php include 'header.php'; ?>
   <div style="height: 50px"></div>
 
-  <div class="container-fluid col-md-offset-1">
+  <div class="container-fluid col-md-offset-1" style="min-height: 61vh">
     <div class="row">
       <div class="col-md-12">
         <div id='checkout-content'>
@@ -46,6 +47,63 @@ include 'snippets/set-url.php';
                         ?>;
 
     var checkoutPanel = '';
+    var payment = `
+          <h3>${(connectedUser === '') ? 'Thank you guest' : 'Hello ' + connectedUser.firstName},</h3>
+          <div class="creditCardForm">
+    <div class="heading">
+        <h2>Please Confirm Purchase</h2>
+    </div>
+    <div class="payment">
+        <form>
+            <div class="form-group owner">
+                <label for="owner">Owner</label>
+                <input type="text" class="form-control" id="owner">
+            </div>
+            <div class="form-group CVV">
+                <label for="cvv">CVV</label>
+                <input type="text" class="form-control" id="cvv">
+            </div>
+            <div class="form-group" id="card-number-field">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" class="form-control" id="cardNumber">
+            </div>
+            <div class="form-group" id="expiration-date">
+                <label>Expiration Date</label>
+                <select>
+                    <option value="01">January</option>
+                    <option value="02">February </option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <select>
+                    <option value="16"> 2016</option>
+                    <option value="17"> 2017</option>
+                    <option value="18"> 2018</option>
+                    <option value="19"> 2019</option>
+                    <option value="20"> 2020</option>
+                    <option value="21"> 2021</option>
+                </select>
+            </div>
+            <div class="form-group" id="credit_cards">
+                <img src="assets/visa.jpg" id="visa">
+                <img src="assets/mastercard.jpg" id="mastercard">
+                <img src="assets/amex.jpg" id="amex">
+            </div>
+            <div class="form-group" id="pay-now">
+                <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>
+          `;
 
     function BuildCheckout() {
       var oReq = new XMLHttpRequest();
@@ -60,15 +118,73 @@ include 'snippets/set-url.php';
       oReq.send();
     }
 
-    function BuildPayment() {
-      return `Built!`;
+    function ActivatePayform() {
+      var owner = $('#owner'),
+        cardNumber = $('#cardNumber'),
+        cardNumberField = $('#card-number-field'),
+        CVV = $("#cvv"),
+        mastercard = $("#mastercard"),
+        confirmButton = $('#confirm-purchase'),
+        visa = $("#visa"),
+        amex = $("#amex");
+
+      cardNumber.payform('formatCardNumber');
+      CVV.payform('formatCardCVC');
+
+      cardNumber.keyup(function() {
+        amex.removeClass('transparent');
+        visa.removeClass('transparent');
+        mastercard.removeClass('transparent');
+
+        if ($.payform.validateCardNumber(cardNumber.val()) == false) {
+          cardNumberField.removeClass('has-success');
+          cardNumberField.addClass('has-error');
+        } else {
+          cardNumberField.removeClass('has-error');
+          cardNumberField.addClass('has-success');
+        }
+
+        if ($.payform.parseCardType(cardNumber.val()) == 'visa') {
+          mastercard.addClass('transparent');
+          amex.addClass('transparent');
+        } else if ($.payform.parseCardType(cardNumber.val()) == 'amex') {
+          mastercard.addClass('transparent');
+          visa.addClass('transparent');
+        } else if ($.payform.parseCardType(cardNumber.val()) == 'mastercard') {
+          amex.addClass('transparent');
+          visa.addClass('transparent');
+        }
+      });
+
+      confirmButton.click(function(e) {
+        e.preventDefault();
+
+        var isCardValid = $.payform.validateCardNumber(cardNumber.val());
+        var isCvvValid = $.payform.validateCardCVC(CVV.val());
+
+        if (owner.val().length < 5) {
+          alert("Wrong owner name");
+        } else if (!isCardValid) {
+          alert("Wrong card number");
+        } else if (!isCvvValid) {
+          alert("Wrong CVV");
+        } else {
+          alert("Thank you for buying with us!");
+          window.location.replace("index.php");
+          // TODO: Write order to the DB
+        }
+      });
     }
 
     function SigninHandler() {
-      $("#signin").click(function() {
-        $(this).hide(2000, function() {
-          $(this).remove();
-        });
+      $(".signin").animate({
+        height: "toggle",
+        opacity: "toggle"
+      }, 400, function() {
+        $('#paymentStep')[0].innerText = '';
+        $('#paymentStep').append(payment);
+
+        ActivatePayform();
       });
     }
 
@@ -78,11 +194,12 @@ include 'snippets/set-url.php';
         if (cartList.length <= 0) {
 
           checkoutPanel = `
-        <div class="flexed-container">
-          <h1>Your cart is empty</h1>
-        </div>
-        `;
+            <div class="flexed-container">
+              <h1>Your cart is empty</h1>
+            </div>
+            `;
           $('#checkout-content').append(checkoutPanel);
+
         } else {
 
           var cartList = JSON.parse(data.currentTarget.responseText);
@@ -133,20 +250,20 @@ include 'snippets/set-url.php';
                   totalItems += parseInt(p.qty)
 
                   products += `
-                <div class="col-md-12 text-left" style="margin: 8px 0 5px 0" id="product-tr-${product.id}">
-                  <div style="display:flex; flex-flow:row; justify-content: space-between; align-items: center" class="text-right">
-                    <div>
-                      <img src="${product.photo}" style="max-width: 90px; max-height: 90px;" />
+                    <div class="col-md-12 text-left" style="margin: 8px 0 5px 0" id="product-tr-${product.id}">
+                      <div style="display:flex; flex-flow:row; justify-content: space-between; align-items: center" class="text-right">
+                        <div>
+                          <img src="${product.photo}" style="max-width: 90px; max-height: 90px;" />
+                        </div>
+                        <div>
+                          ${p.qty} x ${product.title}
+                        </div>
+                        <div>
+                          AU$ ${(product.price.indexOf('.') >= 0 ? product.price : product.price + '.00')}
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      ${p.qty} x ${product.title}
-                    </div>
-                    <div>
-                      AU$ ${(product.price.indexOf('.') >= 0 ? product.price : product.price + '.00')}
-                    </div>
-                  </div>
-                </div>
-                `;
+                  `;
 
                   if (itemsProcessed === array.length) {
                     let price = `
@@ -157,6 +274,9 @@ include 'snippets/set-url.php';
                     $("#products-placeholder").append(products);
                     $("#price1-placeholder").append(price);
                     $("#price2-placeholder").append(price);
+
+                    if (connectedUser !== '')
+                      ActivatePayform();
                   }
                 } else console.error('error code - ' + data.currentTarget.status + '. Text - ' + e.currentTarget.statusText);
               });
@@ -171,85 +291,29 @@ include 'snippets/set-url.php';
           }
 
           let signin = `
-            <tr id="signin">
+            <tr class="signin">
               <td>
                 Checking out as a <b>Guest</b>? You'll be able to save your details to create an account with us later.
               </td>
             </tr>
-            <tr>
+            <tr class="signin">
               <td>
-              <div class="form-group">
-                <label for="inputEmail" class="control-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail" data-error="Bruh, that email address is invalid" required style="max-width:250px">
+                <div class="form-group">
+                  <label for="inputEmail" class="control-label">Email</label>
+                  <input type="email" class="form-control" id="inputEmail" data-error="Bruh, that email address is invalid" required style="max-width:250px">
                 </div>
                 <button class="btn btn-primary" name="submit" type="button" onclick="SigninHandler()">
                   Continue as Guest
                 </button>
               </td>
             </tr>
-            <tr>
+            <tr class="signin">
               <td>
                 Already have an account?<a href="login.php"> Sign in now</a>
               </td>
             </tr>
           `;
 
-          let payment = `
-          <div class="creditCardForm">
-    <div class="heading">
-        <h1>Confirm Purchase</h1>
-    </div>
-    <div class="payment">
-        <form>
-            <div class="form-group owner">
-                <label for="owner">Owner</label>
-                <input type="text" class="form-control" id="owner">
-            </div>
-            <div class="form-group CVV">
-                <label for="cvv">CVV</label>
-                <input type="text" class="form-control" id="cvv">
-            </div>
-            <div class="form-group" id="card-number-field">
-                <label for="cardNumber">Card Number</label>
-                <input type="text" class="form-control" id="cardNumber">
-            </div>
-            <div class="form-group" id="expiration-date">
-                <label>Expiration Date</label>
-                <select>
-                    <option value="01">January</option>
-                    <option value="02">February </option>
-                    <option value="03">March</option>
-                    <option value="04">April</option>
-                    <option value="05">May</option>
-                    <option value="06">June</option>
-                    <option value="07">July</option>
-                    <option value="08">August</option>
-                    <option value="09">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                </select>
-                <select>
-                    <option value="16"> 2016</option>
-                    <option value="17"> 2017</option>
-                    <option value="18"> 2018</option>
-                    <option value="19"> 2019</option>
-                    <option value="20"> 2020</option>
-                    <option value="21"> 2021</option>
-                </select>
-            </div>
-            <div class="form-group" id="credit_cards">
-                <img src="assets/images/visa.jpg" id="visa">
-                <img src="assets/images/mastercard.jpg" id="mastercard">
-                <img src="assets/images/amex.jpg" id="amex">
-            </div>
-            <div class="form-group" id="pay-now">
-                <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm</button>
-            </div>
-        </form>
-    </div>
-</div>
-          `;
           let customer = `
           <div class="row">
             <div class="col-md-12">
@@ -259,7 +323,7 @@ include 'snippets/set-url.php';
             <table style="width:max-width">
               <tr>
                 <td>
-                  <h2>❶ Customer</h2>
+                  <h2>❶ Customer ${(connectedUser === '') ? '' : (' - <font style="font-size:22px;font-weight:light">Connected as ' + connectedUser.firstName + ' ' + connectedUser.lastName + '</font>')}</h2>
                 </td>
               </tr>
               ${(connectedUser === '') ? signin : ''}
@@ -271,7 +335,9 @@ include 'snippets/set-url.php';
               </tr>
               <tr>
                 <td>
-                  ${(connectedUser === '') ? 'Please finish step one to proceed.' : BuildPayment() }
+                  <div id="paymentStep">
+                    ${(connectedUser === '') ? 'Please finish step one to proceed.' : payment }
+                  </div>
                 </td>
               </tr>
             </table>
@@ -363,7 +429,6 @@ include 'snippets/set-url.php';
         </div>
         `;
 
-          RequestCartData();
         }
       } else console.error('error code - ' + data.currentTarget.status + '. Text - ' + e.currentTarget.statusText);
     }

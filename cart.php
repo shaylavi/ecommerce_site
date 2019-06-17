@@ -166,7 +166,7 @@ session_start();
                 </table>`;
                   $("#products-cart").append(html);
                 }
-              } else console.error('error code - ' + data.currentTarget.status + '. Text - ' + e.currentTarget.statusText);
+              } else console.error('error code - ' + data.currentTarget.status + '. Text - ' + data.currentTarget.statusText);
             });
 
             oReq.addEventListener('error', function(data) {
@@ -186,7 +186,17 @@ session_start();
                 </table>`;
           $("#products-cart").append(html);
         }
-      } else console.error('error code - ' + data.currentTarget.status + '. Text - ' + e.currentTarget.statusText);
+      } else {
+        let html = `
+                  <tr>
+                    <td colspan="4" style="text-align: center; color: lightgray">
+                      <h1>No items in the cart</h1>
+                    </td>
+                    </tr>
+                </table>`;
+        $("#products-cart").append(html);
+
+      }
     }
 
     function GetCartQty(itemId) {
@@ -198,10 +208,10 @@ session_start();
     function RemoveProduct(elementId) {
       UpdateCart(elementId, 0);
 
-      $('#product-tr-' + elementId).hide('slow', function(){ 
+      $('#product-tr-' + elementId).hide('slow', function() {
         $('#product-tr-' + elementId).remove();
       });
-      $('#product-hr-' + elementId).hide('slow', function(){ 
+      $('#product-hr-' + elementId).hide('slow', function() {
         $('#product-hr-' + elementId).remove();
       });
     }
