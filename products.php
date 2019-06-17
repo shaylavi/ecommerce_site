@@ -1,6 +1,6 @@
 <?php
-  include 'snippets/set-url.php';
-  include 'snippets/get-products.php';
+include 'snippets/set-url.php';
+include 'snippets/get-products.php';
 $activeClass = '';
 $productCategory = null;
 
@@ -50,13 +50,21 @@ function activeClassLogic($productCategory)
 
   <div class="container" style="width: 90% !important;">
     <div class="row">
-      <div class="col-md-12 product-image">
-        <div class="col-md-3 d-flex flex-row">
+      <div class="col-md-10 product-image d-flex flex-row col-md-offset-2">
+        <div class="col-md-6 d-flex flex-row">
           <div class="col-md-4 d-flex flex-row text-center">
             Filter by keywords:
           </div>
           <div class="col-md-8 d-flex flex-row text-left">
             <input type="text" id="text-filter" class="form-control form-control-sm">
+          </div>
+        </div>
+        <div class="col-md-6 d-flex flex-row">
+          <div class="col-md-4 d-flex flex-row text-center">
+            Filter by Materials:
+          </div>
+          <div class="col-md-8 d-flex flex-row text-left">
+            <input type="text" id="material-filter" class="form-control form-control-sm">
           </div>
         </div>
       </div>
@@ -82,17 +90,25 @@ function activeClassLogic($productCategory)
   <script>
     function filterProducts() {
       var products = $("div[id^=product-]");
-      for (let p=0; p<products.length;p++) {
+      for (let p = 0; p < products.length; p++) {
+        products[p].style.display = 'block';
         if (products[p].innerText != undefined && products[p].innerText != '' && products[p].innerText.toString().toLowerCase().indexOf($("#text-filter").val().toLowerCase()) < 0) {
           products[p].style.display = 'none';
-        } else {
-          products[p].style.display = 'block';
+        } 
+        if ($("#material-filter").val() != undefined && $("#material-filter").val() != '') {
+          if ($(products[p]).find(".material-holder")[0].innerText.toLowerCase().indexOf($("#material-filter").val().toLowerCase()) < 0) {
+            products[p].style.display = 'none';
+          }
         }
       }
     }
 
     var textFilter = $("#text-filter");
-    textFilter.on("keyup", filterProducts)
+    textFilter.on("keyup", filterProducts);
+
+    var materialFilter = $("#material-filter");
+    materialFilter.on("keyup", filterProducts);
+
   </script>
 
   <?php include 'footer.php'; ?>
