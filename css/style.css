@@ -402,11 +402,11 @@
 }
 
 .p-auto {
-    padding: auto;
+  padding: auto;
 }
 
 .m-auto {
-    margin: auto;
+  margin: auto;
 }
 
 .m-0 {
@@ -414,7 +414,7 @@
 }
 
 .mb-2 {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .w-40 {
@@ -425,12 +425,10 @@
   width: 60%;
 }
 
-<<<<<<< HEAD
-.contact .icon {
-    width: 80px;
-    height: auto;
+<<<<<<< head .contact .icon {
+  width: 80px;
+  height: auto;
 }
-
 
 =======
 >>>>>>> origin/dev
@@ -475,15 +473,6 @@
 /* BREAK POINTS - END */
 
 .flexed-container {
-<<<<<<< HEAD
-    min-height: 61vh;
-    margin-right: auto;
-    margin-left: auto;
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-=======
   min-height: 61vh;
   margin-right: auto;
   margin-left: auto;
@@ -491,7 +480,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
->>>>>>> origin/dev
 }
 
 .product-image {
@@ -641,4 +629,11 @@ td {
   display: flex;
   flex-flow: column;
   align-items: center;
+}
+
+#checkout-content h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 60px;
+  color: darkgray;
 }
